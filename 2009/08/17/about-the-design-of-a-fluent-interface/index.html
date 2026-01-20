@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>About the design of a fluent interface - Tim Van Wassenhove</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="About the design of a fluent interface">
+  <meta itemprop="description" content="Now that i have presented a simple ControlStateMachine i can raise the bar a little. A statemachine that handles commands. Here is how a developer should be able to initialize this machine:
+sut.WhenIn(States.Loading) .On(Commands.Next) .Do(() =&gt; Console.WriteLine(&#34;got next command while loading...&#34;)) .Do(() =&gt; Console.WriteLine(&#34;doing it again...&#34;)) .On(Commands.Previous) .Do(() =&gt; Console.WriteLine(&#34;got previous command while loading...&#34;)); sut.WhenIn(States.Ready) .On(Commands.Previous) .Do(() =&gt; Console.WriteLine(&#34;got previous command while ready...&#34;)); So how should we define our methods to accomplish this initialization style? Let’s begin with identifying the methods we need.">
+  <meta itemprop="datePublished" content="2009-08-17T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2021-01-04T22:47:36+01:00">
+  <meta itemprop="wordCount" content="314">
+  <meta itemprop="keywords" content="CSharp,Visual Studio"><meta property="og:url" content="https://timvw.be/2009/08/17/about-the-design-of-a-fluent-interface/">
+  <meta property="og:site_name" content="Tim Van Wassenhove">
+  <meta property="og:title" content="About the design of a fluent interface">
+  <meta property="og:description" content="Now that i have presented a simple ControlStateMachine i can raise the bar a little. A statemachine that handles commands. Here is how a developer should be able to initialize this machine:
+sut.WhenIn(States.Loading) .On(Commands.Next) .Do(() =&gt; Console.WriteLine(&#34;got next command while loading...&#34;)) .Do(() =&gt; Console.WriteLine(&#34;doing it again...&#34;)) .On(Commands.Previous) .Do(() =&gt; Console.WriteLine(&#34;got previous command while loading...&#34;)); sut.WhenIn(States.Ready) .On(Commands.Previous) .Do(() =&gt; Console.WriteLine(&#34;got previous command while ready...&#34;)); So how should we define our methods to accomplish this initialization style? Let’s begin with identifying the methods we need.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2009-08-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-01-04T22:47:36+01:00">
+    <meta property="article:tag" content="CSharp">
+    <meta property="article:tag" content="Visual Studio">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="About the design of a fluent interface">
+  <meta name="twitter:description" content="Now that i have presented a simple ControlStateMachine i can raise the bar a little. A statemachine that handles commands. Here is how a developer should be able to initialize this machine:
+sut.WhenIn(States.Loading) .On(Commands.Next) .Do(() =&gt; Console.WriteLine(&#34;got next command while loading...&#34;)) .Do(() =&gt; Console.WriteLine(&#34;doing it again...&#34;)) .On(Commands.Previous) .Do(() =&gt; Console.WriteLine(&#34;got previous command while loading...&#34;)); sut.WhenIn(States.Ready) .On(Commands.Previous) .Do(() =&gt; Console.WriteLine(&#34;got previous command while ready...&#34;)); So how should we define our methods to accomplish this initialization style? Let’s begin with identifying the methods we need.">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://timvw.be/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://timvw.be/js/main.js"></script>
+	<link href="https://github.com/timvw" rel="me">
+    <link href="https://timvw.be/" rel="me">
+    <link href="https://fosstodon.org/@timvw" rel="me">
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://timvw.be/">Tim Van Wassenhove</a></h1>
+	<div class="site-description"><p>Passionate geek, interested in Technology. Proud father of two</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/timvw" title="Github"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/timvanwassenhove" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="https://timvw.be/feed.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a rel="me" href="https://fosstodon.org/@timvw" class="masto-link" ></a></li>
+			</ul>
+		
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="../../../../">Home</a>
+			</li>
+			
+			<li>
+				<a href="../../../../posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="../../../../tags">Tags</a>
+			</li>
+			
+			<li>
+				<a href="../../../../contact/">Contact</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">17</span>
+							<span class="rest">Aug 2009</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">About the design of a fluent interface</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>Now that i have <a href="">presented a simple ControlStateMachine</a> i can raise the bar a little. A statemachine that handles commands. Here is how a developer should be able to initialize this machine:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>sut<span style="color:#1f2328">.</span>WhenIn<span style="color:#1f2328">(</span>States<span style="color:#1f2328">.</span>Loading<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span>On<span style="color:#1f2328">(</span>Commands<span style="color:#1f2328">.</span>Next<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span>Do<span style="color:#1f2328">(()</span> <span style="color:#1f2328">=&gt;</span> Console<span style="color:#1f2328">.</span>WriteLine<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;got next command while loading...&#34;</span><span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span>Do<span style="color:#1f2328">(()</span> <span style="color:#1f2328">=&gt;</span> Console<span style="color:#1f2328">.</span>WriteLine<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;doing it again...&#34;</span><span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span>On<span style="color:#1f2328">(</span>Commands<span style="color:#1f2328">.</span>Previous<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span>Do<span style="color:#1f2328">(()</span> <span style="color:#1f2328">=&gt;</span> Console<span style="color:#1f2328">.</span>WriteLine<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;got previous command while loading...&#34;</span><span style="color:#1f2328">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sut<span style="color:#1f2328">.</span>WhenIn<span style="color:#1f2328">(</span>States<span style="color:#1f2328">.</span>Ready<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span>On<span style="color:#1f2328">(</span>Commands<span style="color:#1f2328">.</span>Previous<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span>Do<span style="color:#1f2328">(()</span> <span style="color:#1f2328">=&gt;</span> Console<span style="color:#1f2328">.</span>WriteLine<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;got previous command while ready...&#34;</span><span style="color:#1f2328">));</span>
+</span></span></code></pre></div><p>So how should we define our methods to accomplish this initialization style? Let&rsquo;s begin with identifying the methods we need.</p>
+<ul>
+<li>WhenIn(TSTate state)</li>
+<li>On(TCommand command)</li>
+<li>Do(Action action)</li>
+</ul>
+<p>Next thing to do is analyze in which sequence these methods can be called:</p>
+<table>
+  <tr>
+    <th style="width: 200px">
+      From -> To
+    </th>
+<pre><code>&lt;th style=&quot;width: 100px&quot;&gt;
+  WhenIn
+&lt;/th&gt;
+
+&lt;th style=&quot;width: 100px&quot;&gt;
+  On
+&lt;/th&gt;
+
+&lt;th style=&quot;width: 100px&quot;&gt;
+  Do
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      WhenIn
+    </td>
+<pre><code>&lt;td&gt;
+&lt;/td&gt;
+
+&lt;td&gt;
+  X
+&lt;/td&gt;
+
+&lt;td&gt;
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      On
+    </td>
+<pre><code>&lt;td&gt;
+&lt;/td&gt;
+
+&lt;td&gt;
+&lt;/td&gt;
+
+&lt;td&gt;
+  X
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      Do
+    </td>
+<pre><code>&lt;td&gt;
+&lt;/td&gt;
+
+&lt;td&gt;
+  X
+&lt;/td&gt;
+
+&lt;td&gt;
+  X
+&lt;/td&gt;
+</code></pre>
+  </tr>
+</table>
+<p>Ok, now that we have clarified the requirements a little we can start working on a solution. Let&rsquo;s start with defining an interface for each of the methods:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#cf222e">interface</span> <span style="color:#1f2328">IChooseState</span><span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;</span> <span style="color:#1f2328">{</span> Q1 WhenIn<span style="color:#1f2328">(</span>TState state<span style="color:#1f2328">);</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">interface</span> <span style="color:#1f2328">IChooseCommand</span><span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;</span> <span style="color:#1f2328">{</span> Q2 On<span style="color:#1f2328">(</span>TCommand command<span style="color:#1f2328">);</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">interface</span> <span style="color:#1f2328">IChooseAction</span><span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;</span> <span style="color:#1f2328">{</span> Q3 Do<span style="color:#1f2328">(</span>Action action<span style="color:#1f2328">);</span> <span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>From WhenIn we need to be able to call On. Thus Q1 = IChooseCommand&lt;TState, TCommand&gt;. Q2 is also easily solved because from On we only have to be able to call Do, thus Q2 = IChooseAction&lt;TState, TCommand&gt;.</p>
+<p>From Do we should be able to call both On and Do. We can do that by defining another interface which has both methods:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#cf222e">interface</span> <span style="color:#1f2328">IChooseCommandAndAction</span><span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;</span> <span style="color:#1f2328">:</span> IChooseCommand<span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;,</span> IChooseAction<span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>Now that we have found answers for Q1, Q2 and Q3 we can define the API for initializing our StateMachine as following:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>IChooseCommand<span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;</span> WhenIn<span style="color:#1f2328">(</span>TState state<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>IChooseAction<span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;</span> On<span style="color:#1f2328">(</span>TCommand command<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>IChooseCommandAndAction<span style="color:#1f2328">&lt;</span>tstate<span style="color:#1f2328">,</span> TCommand<span style="color:#1f2328">&gt;</span> Do<span style="color:#1f2328">(</span>Action action<span style="color:#1f2328">);</span>
+</span></span></code></pre></div><p>Now tell me about your strategy for implementing a fluent interface!</p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="../../../../tags/csharp">CSharp</a></li>
+							
+							<li><a href="../../../../tags/visual-studio">Visual Studio</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DP4SV12YW"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9DP4SV12YW');
+        }
+      </script><script>feather.replace()</script>
+</body>
+</html>

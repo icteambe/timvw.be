@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Exploring DataGridViewComboBoxColumn databinding (part2) - Tim Van Wassenhove</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="Exploring DataGridViewComboBoxColumn databinding (part2)">
+  <meta itemprop="description" content="A while ago i wrote about Exploring DataGridViewComboBoxColumn databinding using Business Objects. Some people asked me to give an example using DataSets…
+I’ll start with creating a DataSet, add two DataTables, and create a relation on PersonType.Id (int32). In the designer this looks like
+Next i create a DataSetDac that will return an instance of a Filled PersonDataSet (In real life you would probably use a TableAdapter and get the data from a database) The code is as simple as">
+  <meta itemprop="datePublished" content="2007-05-03T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2021-01-04T22:47:36+01:00">
+  <meta itemprop="wordCount" content="354">
+  <meta itemprop="keywords" content="CSharp,Windows Forms"><meta property="og:url" content="https://timvw.be/2007/05/03/exploring-datagridviewcomboboxcolumn-databinding-part2/">
+  <meta property="og:site_name" content="Tim Van Wassenhove">
+  <meta property="og:title" content="Exploring DataGridViewComboBoxColumn databinding (part2)">
+  <meta property="og:description" content="A while ago i wrote about Exploring DataGridViewComboBoxColumn databinding using Business Objects. Some people asked me to give an example using DataSets…
+I’ll start with creating a DataSet, add two DataTables, and create a relation on PersonType.Id (int32). In the designer this looks like
+Next i create a DataSetDac that will return an instance of a Filled PersonDataSet (In real life you would probably use a TableAdapter and get the data from a database) The code is as simple as">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2007-05-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-01-04T22:47:36+01:00">
+    <meta property="article:tag" content="CSharp">
+    <meta property="article:tag" content="Windows Forms">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Exploring DataGridViewComboBoxColumn databinding (part2)">
+  <meta name="twitter:description" content="A while ago i wrote about Exploring DataGridViewComboBoxColumn databinding using Business Objects. Some people asked me to give an example using DataSets…
+I’ll start with creating a DataSet, add two DataTables, and create a relation on PersonType.Id (int32). In the designer this looks like
+Next i create a DataSetDac that will return an instance of a Filled PersonDataSet (In real life you would probably use a TableAdapter and get the data from a database) The code is as simple as">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://timvw.be/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://timvw.be/js/main.js"></script>
+	<link href="https://github.com/timvw" rel="me">
+    <link href="https://timvw.be/" rel="me">
+    <link href="https://fosstodon.org/@timvw" rel="me">
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://timvw.be/">Tim Van Wassenhove</a></h1>
+	<div class="site-description"><p>Passionate geek, interested in Technology. Proud father of two</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/timvw" title="Github"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/timvanwassenhove" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="https://timvw.be/feed.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a rel="me" href="https://fosstodon.org/@timvw" class="masto-link" ></a></li>
+			</ul>
+		
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="../../../../">Home</a>
+			</li>
+			
+			<li>
+				<a href="../../../../posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="../../../../tags">Tags</a>
+			</li>
+			
+			<li>
+				<a href="../../../../contact/">Contact</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">03</span>
+							<span class="rest">May 2007</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">Exploring DataGridViewComboBoxColumn databinding (part2)</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>A while ago i wrote about <a href="http://www.timvw.be/exploring-datagridviewcomboboxcolumn-databinding/">Exploring DataGridViewComboBoxColumn databinding</a> using Business Objects. Some people asked me to give an example using DataSets&hellip;</p>
+<p>I&rsquo;ll start with creating a DataSet, add two DataTables, and create a relation on PersonType.Id (int32). In the designer this looks like</p>
+<p><img src="http://www.timvw.be/wp-content/images/databind-dataset1.gif" alt="screenshot of dataset designer displaying person and persontype"></p>
+<p>Next i create a DataSetDac that will return an instance of a Filled PersonDataSet (In real life you would probably use a TableAdapter and get the data from a database) The code is as simple as</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#cf222e">public</span> <span style="color:#cf222e">static</span> PersonsDataSet Find<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	PersonsDataSet personsDataSet <span style="color:#1f2328">=</span> <span style="color:#cf222e">new</span> PersonsDataSet<span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>PersonType<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;A geeky person&#34;</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>PersonType<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;A coward&#34;</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>PersonType<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Feeling hot hot hot&#34;</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>PersonType<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;(None)&#34;</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>Person<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#0a3069">&#34;Timvw&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>Person<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#0a3069">&#34;John Doe&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>Person<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#0a3069">&#34;An Onymous&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>Person<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#0a3069">&#34;Jenna Jameson&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>	personsDataSet<span style="color:#1f2328">.</span>Person<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>Add<span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#cf222e">object</span><span style="color:#1f2328">[]</span> <span style="color:#1f2328">{</span> <span style="color:#0a3069">&#34;Null Able&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">-</span><span style="color:#0550ae">1</span> <span style="color:#1f2328">});</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">return</span> personsDataSet<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>And now comes the important stuff: Bind the data to the DataGridView and DataGridViewComboBoxColumn</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#cf222e">public</span> Form1<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	InitializeComponent<span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	PersonsDataSet personsDataSet <span style="color:#1f2328">=</span> DataSetDac<span style="color:#1f2328">.</span>Find<span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>dataGridView1<span style="color:#1f2328">.</span>AutoGenerateColumns <span style="color:#1f2328">=</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>ColumnName<span style="color:#1f2328">.</span>DataPropertyName <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;Name&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>ColumnPersonTypeCode<span style="color:#1f2328">.</span>DataPropertyName <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;PersonTypeId&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>ColumnPersonTypeCode<span style="color:#1f2328">.</span>DisplayMember <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;Label&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>ColumnPersonTypeCode<span style="color:#1f2328">.</span>ValueMember <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;Id&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>ColumnPersonTypeCode<span style="color:#1f2328">.</span>DataSource <span style="color:#1f2328">=</span> personsDataSet<span style="color:#1f2328">.</span>PersonType<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	BindingSource bindingSource <span style="color:#1f2328">=</span> <span style="color:#cf222e">new</span> BindingSource<span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>	bindingSource<span style="color:#1f2328">.</span>DataSource <span style="color:#1f2328">=</span> personsDataSet<span style="color:#1f2328">.</span>Person<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>dataGridView1<span style="color:#1f2328">.</span>DataSource <span style="color:#1f2328">=</span> bindingSource<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>Geeks are doomed to stay Geeks forever. When you try change a Person that is a Geek, the values in ComboBox should be limited to Geek and (None). The following code takes care of that</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#cf222e">void</span> dataGridView1_EditingControlShowing<span style="color:#1f2328">(</span><span style="color:#cf222e">object</span> sender<span style="color:#1f2328">,</span> DataGridViewEditingControlShowingEventArgs e<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>dataGridView1<span style="color:#1f2328">.</span>CurrentCell<span style="color:#1f2328">.</span>ColumnIndex <span style="color:#1f2328">==</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>ColumnPersonTypeCode<span style="color:#1f2328">.</span>Index<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>		BindingSource bindingSource <span style="color:#1f2328">=</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>dataGridView1<span style="color:#1f2328">.</span>DataSource <span style="color:#cf222e">as</span> BindingSource<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>		PersonsDataSet<span style="color:#1f2328">.</span>PersonRow person <span style="color:#1f2328">=</span> <span style="color:#1f2328">(</span>bindingSource<span style="color:#1f2328">.</span>Current <span style="color:#cf222e">as</span> DataRowView<span style="color:#1f2328">).</span>Row <span style="color:#cf222e">as</span> PersonsDataSet<span style="color:#1f2328">.</span>PersonRow<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#57606a">// this method returns the allowed persontypes for the given person</span>
+</span></span><span style="display:flex;"><span>		PersonsDataSet<span style="color:#1f2328">.</span>PersonTypeDataTable personTypeDataTable <span style="color:#1f2328">=</span> DataSetDac<span style="color:#1f2328">.</span>FindPersonTypes<span style="color:#1f2328">(</span>person<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		DataGridViewComboBoxEditingControl comboBox <span style="color:#1f2328">=</span> e<span style="color:#1f2328">.</span>Control <span style="color:#cf222e">as</span> DataGridViewComboBoxEditingControl<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>		comboBox<span style="color:#1f2328">.</span>DataSource <span style="color:#1f2328">=</span> personTypeDataTable<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		comboBox<span style="color:#1f2328">.</span>SelectionChangeCommitted <span style="color:#1f2328">-=</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>comboBox_SelectionChangeCommitted<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>		comboBox<span style="color:#1f2328">.</span>SelectionChangeCommitted <span style="color:#1f2328">+=</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>comboBox_SelectionChangeCommitted<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">public</span> <span style="color:#cf222e">static</span> PersonsDataSet<span style="color:#1f2328">.</span>PersonTypeDataTable FindPersonTypes<span style="color:#1f2328">(</span>PersonsDataSet<span style="color:#1f2328">.</span>PersonRow person<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#57606a">// by default, all persons simply have one of the available persontypecodes</span>
+</span></span><span style="display:flex;"><span>	PersonsDataSet personsDataSet <span style="color:#1f2328">=</span> Find<span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>person<span style="color:#1f2328">.</span>PersonTypeId<span style="color:#1f2328">.</span>Equals<span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#57606a">// geeks are doomed to stay geeks</span>
+</span></span><span style="display:flex;"><span>		personsDataSet<span style="color:#1f2328">.</span>PersonType<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>RemoveAt<span style="color:#1f2328">(</span><span style="color:#0550ae">2</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>		personsDataSet<span style="color:#1f2328">.</span>PersonType<span style="color:#1f2328">.</span>Rows<span style="color:#1f2328">.</span>RemoveAt<span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">return</span> personsDataSet<span style="color:#1f2328">.</span>PersonType<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">void</span> comboBox_SelectionChangeCommitted<span style="color:#1f2328">(</span><span style="color:#cf222e">object</span> sender<span style="color:#1f2328">,</span> EventArgs e<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span>dataGridView1<span style="color:#1f2328">.</span>EndEdit<span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>As always, feel free to download <a href="http://www.timvw.be/wp-content/code/csharp/DataGridViewComboBoxBinding2.zip">DataGridViewComboBoxBinding2.zip</a>.</p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="../../../../tags/csharp">CSharp</a></li>
+							
+							<li><a href="../../../../tags/windows-forms">Windows Forms</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DP4SV12YW"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9DP4SV12YW');
+        }
+      </script><script>feather.replace()</script>
+</body>
+</html>

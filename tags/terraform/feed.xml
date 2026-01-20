@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Terraform on Tim Van Wassenhove</title>
+    <link>https://timvw.be/tags/terraform/</link>
+    <description>Recent content in Terraform on Tim Van Wassenhove</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Mar 2025 15:45:45 +0100</lastBuildDate>
+    <atom:link href="https://timvw.be/tags/terraform/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Implementing Domain-Level Forward Authentication with Authentik</title>
+      <link>https://timvw.be/2025/03/22/implementing-domain-level-forward-authentication-with-authentik/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2025/03/22/implementing-domain-level-forward-authentication-with-authentik/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In my previous posts on Authentik, I&amp;rsquo;ve covered &lt;a href=&#34;../../2025/03/17/setting-up-authentik-with-kubernetes-and-fluxcd/&#34;&gt;setting up the platform&lt;/a&gt;, &lt;a href=&#34;../../2025/03/18/managing-authentik-with-terraform/&#34;&gt;managing it with Terraform&lt;/a&gt;, and integrating it with services like &lt;a href=&#34;../../2025/03/19/configuring-grafana-oauth-with-authentik/&#34;&gt;Grafana&lt;/a&gt;, &lt;a href=&#34;../../2025/03/20/configuring-minio-oauth-with-authentik/&#34;&gt;MinIO&lt;/a&gt;, and &lt;a href=&#34;../../2025/03/21/configuring-aws-identity-center-with-authentik-scim/&#34;&gt;AWS IAM Identity Center&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Today, I&amp;rsquo;ll explain how I implemented domain-level forward authentication to protect multiple applications in my Kubernetes cluster using Authentik&amp;rsquo;s forward auth provider and NGINX ingress controller.&lt;/p&gt;&#xA;&lt;h2 id=&#34;understanding-forward-authentication&#34;&gt;Understanding Forward Authentication&lt;/h2&gt;&#xA;&lt;p&gt;Forward authentication is a pattern where a proxy (like NGINX) delegates the authentication decision to an external service (in our case, Authentik). This approach allows you to protect multiple applications without modifying their code or configurations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configuring AWS Identity Center with Authentik SCIM Provisioning</title>
+      <link>https://timvw.be/2025/03/21/configuring-aws-identity-center-with-authentik-scim-provisioning/</link>
+      <pubDate>Fri, 21 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2025/03/21/configuring-aws-identity-center-with-authentik-scim-provisioning/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In previous posts, I&amp;rsquo;ve covered &lt;a href=&#34;../../2025/03/17/setting-up-authentik-with-kubernetes-and-fluxcd/&#34;&gt;setting up Authentik with Kubernetes and FluxCD&lt;/a&gt;, &lt;a href=&#34;../../2025/03/18/managing-authentik-with-terraform/&#34;&gt;managing Authentik with Terraform&lt;/a&gt;, and integrating it with various services like &lt;a href=&#34;../../2025/03/19/configuring-grafana-oauth-with-authentik/&#34;&gt;Grafana&lt;/a&gt; and &lt;a href=&#34;../../2025/03/20/configuring-minio-oauth-with-authentik/&#34;&gt;MinIO&lt;/a&gt;. Today, I&amp;rsquo;ll explain how I configured AWS IAM Identity Center (formerly AWS SSO) with Authentik using SCIM provisioning.&lt;/p&gt;&#xA;&lt;p&gt;AWS IAM Identity Center has become a critical component for managing access to AWS accounts and applications. By integrating it with Authentik using SCIM (System for Cross-domain Identity Management), we can automate user provisioning and deprovisioning, centralize identity management, and implement consistent access controls across our AWS environment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configuring MinIO OAuth with Authentik</title>
+      <link>https://timvw.be/2025/03/20/configuring-minio-oauth-with-authentik/</link>
+      <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2025/03/20/configuring-minio-oauth-with-authentik/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Following our previous posts about &lt;a href=&#34;../../2025/03/17/setting-up-authentik-with-kubernetes-and-fluxcd/&#34;&gt;setting up Authentik with Kubernetes and FluxCD&lt;/a&gt;, &lt;a href=&#34;../../2025/03/18/managing-authentik-with-terraform/&#34;&gt;managing Authentik with Terraform&lt;/a&gt;, and &lt;a href=&#34;../../2025/03/19/configuring-grafana-oauth-with-authentik/&#34;&gt;configuring Grafana OAuth integration&lt;/a&gt;, today I&amp;rsquo;ll share how I implemented OAuth authentication for MinIO using Authentik as the identity provider.&lt;/p&gt;&#xA;&lt;p&gt;MinIO is a high-performance object storage system compatible with Amazon S3 API. By integrating it with Authentik, we can leverage centralized authentication and role-based access control for our object storage environment.&lt;/p&gt;&#xA;&lt;h2 id=&#34;integration-overview&#34;&gt;Integration Overview&lt;/h2&gt;&#xA;&lt;p&gt;The integration between MinIO and Authentik involves the following components:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configuring Grafana OAuth with Authentik</title>
+      <link>https://timvw.be/2025/03/19/configuring-grafana-oauth-with-authentik/</link>
+      <pubDate>Wed, 19 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2025/03/19/configuring-grafana-oauth-with-authentik/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Following our previous posts about &lt;a href=&#34;../../2025/03/17/setting-up-authentik-with-kubernetes-and-fluxcd/&#34;&gt;setting up Authentik with Kubernetes and FluxCD&lt;/a&gt; and &lt;a href=&#34;../../2025/03/18/managing-authentik-with-terraform/&#34;&gt;managing Authentik with Terraform&lt;/a&gt;, today we&amp;rsquo;ll demonstrate how to implement OAuth authentication for Grafana using Authentik as the identity provider. This integration offers several benefits:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Centralized user management with single sign-on (SSO)&lt;/li&gt;&#xA;&lt;li&gt;Role-based access control for Grafana using Authentik groups&lt;/li&gt;&#xA;&lt;li&gt;Secure authentication without the need to maintain separate user databases&lt;/li&gt;&#xA;&lt;li&gt;Consistent user experience across services&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;infrastructure-overview&#34;&gt;Infrastructure Overview&lt;/h2&gt;&#xA;&lt;p&gt;Our setup consists of:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Managing Authentik with Terraform</title>
+      <link>https://timvw.be/2025/03/18/managing-authentik-with-terraform/</link>
+      <pubDate>Tue, 18 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2025/03/18/managing-authentik-with-terraform/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In my &lt;a href=&#34;../../2025/03/17/setting-up-authentik-with-kubernetes-and-fluxcd/&#34;&gt;previous post&lt;/a&gt;, I detailed how to deploy &lt;a href=&#34;https://goauthentik.io/&#34;&gt;Authentik&lt;/a&gt; on Kubernetes using FluxCD for GitOps-driven management. Today, I&amp;rsquo;ll explore how to manage the configuration of your Authentik instance using Terraform, providing a complete infrastructure-as-code solution for your identity provider.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-terraform-for-authentik&#34;&gt;Why Terraform for Authentik?&lt;/h2&gt;&#xA;&lt;p&gt;While deploying Authentik with Kubernetes and FluxCD gives us a solid foundation, we still need to configure the actual identity provider - creating applications, setting up OAuth providers, configuring authorization policies, and more. This is where Terraform comes in.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
