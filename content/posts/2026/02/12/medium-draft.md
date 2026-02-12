@@ -22,47 +22,13 @@ Think of it as training wheels. Newcomers keep them on while learning, and once 
 
 ---
 
-## Building the Hints Bar
+## How It Works
 
-Tmux supports multiple status lines via `set -g status 2`. The first line is the default status bar showing windows. The second line is where the hints bar lives.
+Tmux supports multiple status lines via `set -g status 2`. The first line is the default status bar showing windows. The second line is where the hints bar lives, using `status-format[1]` to render the color-coded shortcuts.
 
-Here's the key configuration:
+The config also includes a toggle keybinding: `prefix + h` (`Ctrl+b h`) switches between single and double status lines, so the hints bar can be hidden once shortcuts become muscle memory.
 
-```
-# Enable two status lines
-set -g status 2
-set -g status-interval 1
-
-# Zellij-style shortcut hints on the second status line
-set -g status-format[1] '...'  # (see full config below)
-```
-
-The format string uses tmux's style tags to create a pill-like effect where each shortcut key stands out against its action description:
-
-- `#[bg=green,fg=black] d` -- the key in a colored pill
-- `#[bg=colour235,fg=white] Detach` -- the action in neutral colors
-- `|` separators between shortcuts, `||` between categories
-
-The `colour235` dark grey background gives the bar its own visual identity, clearly separate from the main status line.
-
----
-
-## Adding a Toggle
-
-For experienced users, the hints bar is unnecessary screen real estate. One line gives you a toggle:
-
-```
-# Toggle hints bar with prefix + h
-bind-key h if -F '#{==:#{status},2}' 'set -g status on' 'set -g status 2'
-```
-
-This checks the current state: if the status shows two lines, collapse to one. Otherwise, expand back to two. Press `Ctrl+b h` to toggle.
-
----
-
-## The Complete Configuration
-
-The full `~/.tmux.conf` is available as a [GitHub Gist](https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144). Copy it, adjust to taste, and reload with:
+The full, commented `~/.tmux.conf` is available as a [GitHub Gist](https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144) -- it explains the format pattern, color coding, and separators inline. Copy it, adjust to taste, and reload with:
 
 ```
 tmux source-file ~/.tmux.conf

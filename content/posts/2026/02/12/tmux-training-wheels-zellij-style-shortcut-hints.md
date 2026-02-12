@@ -22,53 +22,13 @@ Think of it as training wheels. Newcomers keep them on while learning, and once 
 
 ![Tmux with Zellij-style shortcut hints bar](/images/2026/02/12/tmux-status-lines.png)
 
-## Building the Hints Bar
+## How It Works
 
-Tmux supports multiple status lines via `set -g status 2`. The first line (`status-format[0]`) is the default status bar showing windows. The second line (`status-format[1]`) is where the hints bar lives.
+Tmux supports multiple status lines via `set -g status 2`. The first line is the default status bar showing windows. The second line is where the hints bar lives, using `status-format[1]` to render the color-coded shortcuts.
 
-Here's the configuration:
+The config also includes a toggle keybinding: `prefix + h` (`Ctrl+b h`) switches between single and double status lines, so the hints bar can be hidden once shortcuts become muscle memory.
 
-```bash
-# Enable two status lines
-set -g status 2
-set -g status-interval 1
-
-# Zellij-style shortcut hints on the second status line
-set -g status-format[1] '#[bg=colour235,fg=white] #[fg=green,bold]SESSION #[bg=green,fg=black] ^b #[bg=colour235,fg=colour245]+ #[bg=green,fg=black] d #[bg=colour235,fg=white] Detach #[fg=colour240]| #[bg=green,fg=black] s #[bg=colour235,fg=white] List #[fg=colour240]| #[bg=green,fg=black] a #[bg=colour235,fg=white] New #[fg=colour240]| #[bg=green,fg=black] $ #[bg=colour235,fg=white] Rename #[fg=colour240]| #[bg=green,fg=black] ( #[bg=colour235,fg=white] Prev #[fg=colour240]| #[bg=green,fg=black] ) #[bg=colour235,fg=white] Next #[fg=colour240]|| #[fg=blue,bold]WINDOW #[bg=blue,fg=white] ^b #[bg=colour235,fg=colour245]+ #[bg=blue,fg=white] c #[bg=colour235,fg=white] New #[fg=colour240]| #[bg=blue,fg=white] n #[bg=colour235,fg=white] Next #[fg=colour240]| #[bg=blue,fg=white] p #[bg=colour235,fg=white] Prev #[fg=colour240]| #[bg=blue,fg=white] w #[bg=colour235,fg=white] List #[fg=colour240]| #[bg=blue,fg=white] , #[bg=colour235,fg=white] Rename #[fg=colour240]|| #[fg=magenta,bold]PANE #[bg=magenta,fg=white] ^b #[bg=colour235,fg=colour245]+ #[bg=magenta,fg=white] % #[bg=colour235,fg=white] VSplit #[fg=colour240]| #[bg=magenta,fg=white] " #[bg=colour235,fg=white] HSplit #[fg=colour240]| #[bg=magenta,fg=white] z #[bg=colour235,fg=white] Zoom #[fg=colour240]| #[bg=magenta,fg=white] x #[bg=colour235,fg=white] Kill #[fg=colour240]| #[bg=magenta,fg=white] o #[bg=colour235,fg=white] Next #[fg=colour240]| #[bg=magenta,fg=white] arrows #[bg=colour235,fg=white] Navigate'
-```
-
-Let me break down what's happening:
-
-- `#[bg=colour235]` sets the background to a dark grey, giving the bar its own visual identity separate from the main status line
-- Each category label (SESSION, WINDOW, PANE) is displayed in bold with its category color
-- The shortcut keys are shown with colored backgrounds, followed by their action names in white
-- `|` separators visually group related shortcuts within a category
-- `||` double separators mark the boundary between categories
-
-### The Format Pattern
-
-Each shortcut follows the same pattern:
-
-```text
-#[bg=<color>,fg=white] <key> #[bg=colour235,fg=white] <action>
-```
-
-This creates a pill-like effect where the key stands out against the action description, making it easy to scan.
-
-## Adding a Toggle Keybinding
-
-For experienced users, the hints bar is unnecessary screen real estate. A toggle keybinding lets you hide it:
-
-```bash
-# Toggle hints bar with prefix + h
-bind-key h if -F '#{==:#{status},2}' 'set -g status on' 'set -g status 2'
-```
-
-This uses tmux's conditional format: if the status is currently `2` (both lines visible), switch to `on` (single line). Otherwise, switch back to `2`. Press `Ctrl+b h` to toggle.
-
-## The Complete Configuration
-
-The full `~/.tmux.conf` is available as a [GitHub Gist](https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144). Copy it, adjust to taste, and reload with:
+The full, commented `~/.tmux.conf` is available as a [GitHub Gist](https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144) -- it explains the format pattern, color coding, and separators inline. Copy it, adjust to taste, and reload with:
 
 ```bash
 tmux source-file ~/.tmux.conf
