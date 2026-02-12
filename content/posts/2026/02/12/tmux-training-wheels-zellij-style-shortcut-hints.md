@@ -68,30 +68,7 @@ This uses tmux's conditional format: if the status is currently `2` (both lines 
 
 ## The Complete Configuration
 
-Here's the full `~/.tmux.conf` with the hints bar, toggle, and a few other useful settings:
-
-```bash
-set -g mouse on
-set -g history-limit 100000
-bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
-set -g set-clipboard on
-
-set -g renumber-windows on
-
-set -g status-left '#S '
-set -g status-left-length 100
-
-# Custom keybindings
-bind-key a command-prompt -p "New session name:" { new-session -d -s "%%" ; switch-client -t "%%" }
-bind-key h if -F '#{==:#{status},2}' 'set -g status on' 'set -g status 2'
-
-# --- Zellij-style shortcut hints bar ---
-set -g status 2
-set -g status-interval 1
-set -g status-format[1] '#[bg=colour235,fg=white] #[fg=green,bold]SESSION #[bg=green,fg=black] ^b #[bg=colour235,fg=colour245]+ #[bg=green,fg=black] d #[bg=colour235,fg=white] Detach #[fg=colour240]| #[bg=green,fg=black] s #[bg=colour235,fg=white] List #[fg=colour240]| #[bg=green,fg=black] a #[bg=colour235,fg=white] New #[fg=colour240]| #[bg=green,fg=black] $ #[bg=colour235,fg=white] Rename #[fg=colour240]| #[bg=green,fg=black] ( #[bg=colour235,fg=white] Prev #[fg=colour240]| #[bg=green,fg=black] ) #[bg=colour235,fg=white] Next #[fg=colour240]|| #[fg=blue,bold]WINDOW #[bg=blue,fg=white] ^b #[bg=colour235,fg=colour245]+ #[bg=blue,fg=white] c #[bg=colour235,fg=white] New #[fg=colour240]| #[bg=blue,fg=white] n #[bg=colour235,fg=white] Next #[fg=colour240]| #[bg=blue,fg=white] p #[bg=colour235,fg=white] Prev #[fg=colour240]| #[bg=blue,fg=white] w #[bg=colour235,fg=white] List #[fg=colour240]| #[bg=blue,fg=white] , #[bg=colour235,fg=white] Rename #[fg=colour240]|| #[fg=magenta,bold]PANE #[bg=magenta,fg=white] ^b #[bg=colour235,fg=colour245]+ #[bg=magenta,fg=white] % #[bg=colour235,fg=white] VSplit #[fg=colour240]| #[bg=magenta,fg=white] " #[bg=colour235,fg=white] HSplit #[fg=colour240]| #[bg=magenta,fg=white] z #[bg=colour235,fg=white] Zoom #[fg=colour240]| #[bg=magenta,fg=white] x #[bg=colour235,fg=white] Kill #[fg=colour240]| #[bg=magenta,fg=white] o #[bg=colour235,fg=white] Next #[fg=colour240]| #[bg=magenta,fg=white] arrows #[bg=colour235,fg=white] Navigate'
-```
-
-After saving, reload it with:
+The full `~/.tmux.conf` is available as a [GitHub Gist](https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144). Copy it, adjust to taste, and reload with:
 
 ```bash
 tmux source-file ~/.tmux.conf
@@ -114,6 +91,7 @@ The `prefix + h` toggle means the bar is never permanent. It's training wheels y
 
 ## Resources
 
+- [Complete tmux.conf (GitHub Gist)](https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144)
 - [Tmux manual - status line](https://man.openbsd.org/tmux#status-format)
 - [Zellij terminal multiplexer](https://zellij.dev/)
 - [Tmux on GitHub](https://github.com/tmux/tmux)

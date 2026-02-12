@@ -14,6 +14,7 @@ After giving Zellij a try recently, I liked how it shows available shortcuts rig
 
 Training wheels for tmux. Keep them on while learning, remove them when ready.
 
+Config (ready to copy): https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144
 Full walkthrough: https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/
 
 #tmux #terminal #productivity #developerexperience #devtools
