@@ -5,10 +5,37 @@
     <loc>https://timvw.be/contact/</loc>
     <lastmod>2025-08-20T14:04:54+02:00</lastmod>
   </url><url>
-    <loc>https://timvw.be/categories/ai/</loc>
-    <lastmod>2025-10-14T18:10:32+02:00</lastmod>
-  </url><url>
     <loc>https://timvw.be/categories/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/developer-experience/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/categories/developer-tools/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/posts/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/productivity/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/terminal/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/tmux/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/</loc>
+    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/categories/ai/</loc>
     <lastmod>2025-10-14T18:10:32+02:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/distributed-tracing/</loc>
@@ -36,15 +63,6 @@
     <lastmod>2025-10-14T18:10:32+02:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/opentelemetry/</loc>
-    <lastmod>2025-10-14T18:10:32+02:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/posts/</loc>
-    <lastmod>2025-10-14T18:10:32+02:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/tags/</loc>
-    <lastmod>2025-10-14T18:10:32+02:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/</loc>
     <lastmod>2025-10-14T18:10:32+02:00</lastmod>
   </url><url>
     <loc>https://timvw.be/2025/06/27/distributed-tracing-with-fastmcp-combining-opentelemetry-and-langfuse/</loc>

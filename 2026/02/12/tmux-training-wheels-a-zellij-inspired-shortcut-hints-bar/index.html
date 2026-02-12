@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar - Tim Van Wassenhove</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar">
+  <meta itemprop="description" content="I’ve been using tmux since around 2010, after years of working with GNU Screen. Tmux itself has been around since 2007, and over the years its shortcuts have become second nature to me. But I’ve noticed that when colleagues see my terminal setup and want to try tmux themselves, the keyboard shortcuts are the first barrier. They end up with a cheat sheet pinned to their monitor or open in a browser tab, constantly context-switching away from the terminal.">
+  <meta itemprop="datePublished" content="2026-02-12T10:00:00+01:00">
+  <meta itemprop="dateModified" content="2026-02-12T13:55:22+01:00">
+  <meta itemprop="wordCount" content="477">
+  <meta itemprop="keywords" content="Tmux,Terminal,Productivity,Developer-Experience"><meta property="og:url" content="https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/">
+  <meta property="og:site_name" content="Tim Van Wassenhove">
+  <meta property="og:title" content="Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar">
+  <meta property="og:description" content="I’ve been using tmux since around 2010, after years of working with GNU Screen. Tmux itself has been around since 2007, and over the years its shortcuts have become second nature to me. But I’ve noticed that when colleagues see my terminal setup and want to try tmux themselves, the keyboard shortcuts are the first barrier. They end up with a cheat sheet pinned to their monitor or open in a browser tab, constantly context-switching away from the terminal.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-12T10:00:00+01:00">
+    <meta property="article:modified_time" content="2026-02-12T13:55:22+01:00">
+    <meta property="article:tag" content="Tmux">
+    <meta property="article:tag" content="Terminal">
+    <meta property="article:tag" content="Productivity">
+    <meta property="article:tag" content="Developer-Experience">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar">
+  <meta name="twitter:description" content="I’ve been using tmux since around 2010, after years of working with GNU Screen. Tmux itself has been around since 2007, and over the years its shortcuts have become second nature to me. But I’ve noticed that when colleagues see my terminal setup and want to try tmux themselves, the keyboard shortcuts are the first barrier. They end up with a cheat sheet pinned to their monitor or open in a browser tab, constantly context-switching away from the terminal.">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://timvw.be/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://timvw.be/js/main.js"></script>
+	<link href="https://github.com/timvw" rel="me">
+    <link href="https://timvw.be/" rel="me">
+    <link href="https://fosstodon.org/@timvw" rel="me">
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://timvw.be/">Tim Van Wassenhove</a></h1>
+	<div class="site-description"><p>Passionate geek, interested in Technology. Proud father of two</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/timvw" title="Github"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/timvanwassenhove" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="https://timvw.be/feed.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a rel="me" href="https://fosstodon.org/@timvw" class="masto-link" ></a></li>
+			</ul>
+		
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="../../../../">Home</a>
+			</li>
+			
+			<li>
+				<a href="../../../../posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="../../../../tags">Tags</a>
+			</li>
+			
+			<li>
+				<a href="../../../../contact/">Contact</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">12</span>
+							<span class="rest">Feb 2026</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>I&rsquo;ve been using tmux since around 2010, after years of working with GNU Screen. Tmux itself has been around since <a href="https://github.com/tmux/tmux">2007</a>, and over the years its shortcuts have become second nature to me. But I&rsquo;ve noticed that when colleagues see my terminal setup and want to try tmux themselves, the keyboard shortcuts are the first barrier. They end up with a cheat sheet pinned to their monitor or open in a browser tab, constantly context-switching away from the terminal.</p>
+<p>Recently I gave <a href="https://zellij.dev/">Zellij</a> a try and immediately noticed its always-visible shortcut hints bar at the bottom of the screen. It&rsquo;s a small thing, but it removes the need for an external reference entirely. I thought: why not bring that same idea to tmux?</p>
+<h2 id="the-idea-training-wheels-for-tmux">The Idea: Training Wheels for Tmux</h2>
+<p>The concept is simple: use tmux&rsquo;s second status line to display a color-coded bar showing the most common shortcuts, grouped by category:</p>
+<ul>
+<li><strong>Green</strong> for session operations (detach, list, new, rename)</li>
+<li><strong>Blue</strong> for window operations (new, next, prev, list, rename)</li>
+<li><strong>Magenta</strong> for pane operations (split, zoom, kill, navigate)</li>
+</ul>
+<p>Think of it as training wheels. Newcomers keep them on while learning, and once the shortcuts become muscle memory, they toggle them off with a single keybinding.</p>
+<p><img src="../../../../images/2026/02/12/tmux-status-lines.png" alt="Tmux with Zellij-style shortcut hints bar"></p>
+<h2 id="how-it-works">How It Works</h2>
+<p>Tmux supports multiple status lines via <code>set -g status 2</code>. The first line is the default status bar showing windows. The second line is where the hints bar lives, using <code>status-format[1]</code> to render the color-coded shortcuts.</p>
+<p>The config also includes a toggle keybinding: <code>prefix + h</code> (<code>Ctrl+b h</code>) switches between single and double status lines, so the hints bar can be hidden once shortcuts become muscle memory.</p>
+<p>The full, commented <code>~/.tmux.conf</code> is available as a <a href="https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144">GitHub Gist</a> &ndash; it explains the format pattern, color coding, and separators inline. Copy it, adjust to taste, and reload with:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tmux source-file ~/.tmux.conf
+</span></span></code></pre></div><h2 id="making-it-your-own">Making It Your Own</h2>
+<p>This configuration is a starting point. A few ideas for customization:</p>
+<ul>
+<li><strong>Add more shortcuts</strong>: Include copy-mode bindings or custom keybindings you&rsquo;ve defined</li>
+<li><strong>Change colors</strong>: Pick colors that match your terminal theme</li>
+<li><strong>Reorganize categories</strong>: Group by frequency of use instead of tmux&rsquo;s conceptual model</li>
+<li><strong>Add a custom session keybinding</strong>: The <code>bind-key a</code> line above adds <code>prefix + a</code> to create a new named session, which is much faster than the default <code>prefix + :</code> followed by typing <code>new-session</code></li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Tmux has been around since 2007 and remains one of the most powerful terminal multiplexers available. But its keyboard-driven interface has a real learning curve, especially for people coming from GUI-based terminals. By borrowing Zellij&rsquo;s idea of an always-visible hints bar, newcomers get a built-in reference right where they need it, without leaving the terminal.</p>
+<p>The <code>prefix + h</code> toggle means the bar is never permanent. It&rsquo;s training wheels you remove when you&rsquo;re ready.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://gist.github.com/timvw/79fd84dea6cf1c9c0d36b817f5f39144">Complete tmux.conf (GitHub Gist)</a></li>
+<li><a href="https://man.openbsd.org/tmux#status-format">Tmux manual - status line</a></li>
+<li><a href="https://zellij.dev/">Zellij terminal multiplexer</a></li>
+<li><a href="https://github.com/tmux/tmux">Tmux on GitHub</a></li>
+</ul>
+
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="../../../../tags/tmux">tmux</a></li>
+							
+							<li><a href="../../../../tags/terminal">terminal</a></li>
+							
+							<li><a href="../../../../tags/productivity">productivity</a></li>
+							
+							<li><a href="../../../../tags/developer-experience">developer-experience</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DP4SV12YW"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9DP4SV12YW');
+        }
+      </script><script>feather.replace()</script>
+</body>
+</html>

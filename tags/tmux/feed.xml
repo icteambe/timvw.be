@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tmux on Tim Van Wassenhove</title>
+    <link>https://timvw.be/tags/tmux/</link>
+    <description>Recent content in Tmux on Tim Van Wassenhove</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Feb 2026 13:55:22 +0100</lastBuildDate>
+    <atom:link href="https://timvw.be/tags/tmux/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar</title>
+      <link>https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/</link>
+      <pubDate>Thu, 12 Feb 2026 10:00:00 +0100</pubDate>
+      <guid>https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using tmux since around 2010, after years of working with GNU Screen. Tmux itself has been around since &lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;2007&lt;/a&gt;, and over the years its shortcuts have become second nature to me. But I&amp;rsquo;ve noticed that when colleagues see my terminal setup and want to try tmux themselves, the keyboard shortcuts are the first barrier. They end up with a cheat sheet pinned to their monitor or open in a browser tab, constantly context-switching away from the terminal.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

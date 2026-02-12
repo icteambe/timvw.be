@@ -6,7 +6,7 @@
     <description>Recent content on Tim Van Wassenhove</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Oct 2025 18:10:32 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 12 Feb 2026 13:55:22 +0100</lastBuildDate>
     <atom:link href="https://timvw.be/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Contact</title>
@@ -14,6 +14,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://timvw.be/contact/</guid>
       <description>&lt;div style=&#34;text-align: center; margin: 2em 0;&#34;&gt;&#xA;    &lt;img src=&#34;./images/tim-avatar.png&#34; alt=&#34;Tim Van Wassenhove&#34; style=&#34;width: 200px; height: 200px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);&#34;&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;mail&#34;&gt;&lt;/i&gt; &lt;a href=&#34;mailto:tim@timvw.be&#34;&gt;tim@timvw.be&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;phone&#34;&gt;&lt;/i&gt; &lt;a href=&#34;tel:+32473998552&#34;&gt;+32 473 998 552&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;globe&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://timvw.be/&#34;&gt;timvw.be&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/timvw&#34;&gt;@timvw&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;linkedin&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.linkedin.com/in/timvanwassenhove&#34;&gt;Tim Van Wassenhove&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;at-sign&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://fosstodon.org/@timvw&#34;&gt;@timvw@fosstodon.org&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div style=&#34;margin: 2em 0; text-align: center;&#34;&gt;&#xA;    &lt;a href=&#34;./tim-van-wassenhove.vcf&#34; download style=&#34;display: inline-block; padding: 10px 20px; background-color: #333; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;&#34;&gt;&#xA;        📇 Download vCard&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;div style=&#34;margin-top: 3em; padding-top: 2em; border-top: 1px solid #ddd;&#34;&gt;&#xA;    &lt;small&gt;Add my contact information to your address book by downloading the vCard above.&lt;/small&gt;&#xA;&lt;/div&gt;&#xA;&lt;script&gt;&#xA;  feather.replace()&#xA;&lt;/script&gt;</description>
+    </item>
+    <item>
+      <title>Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar</title>
+      <link>https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/</link>
+      <pubDate>Thu, 12 Feb 2026 10:00:00 +0100</pubDate>
+      <guid>https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using tmux since around 2010, after years of working with GNU Screen. Tmux itself has been around since &lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;2007&lt;/a&gt;, and over the years its shortcuts have become second nature to me. But I&amp;rsquo;ve noticed that when colleagues see my terminal setup and want to try tmux themselves, the keyboard shortcuts are the first barrier. They end up with a cheat sheet pinned to their monitor or open in a browser tab, constantly context-switching away from the terminal.&lt;/p&gt;</description>
     </item>
     <item>
       <title>FastMCP Distributed Tracing: Transport-Agnostic Context Propagation with _meta</title>
