@@ -6,9 +6,9 @@ tags: ["tmux", "terminal", "productivity", "developer-experience"]
 categories: ["developer-tools"]
 ---
 
-I recently switched to tmux as my terminal multiplexer. The problem? I kept forgetting the shortcuts. Every time I needed to split a pane or switch sessions, I'd alt-tab to a browser with a cheat sheet open. It completely broke my flow.
+I've been using tmux since around 2010, after years of working with GNU Screen. Tmux itself has been around since [2007](https://github.com/tmux/tmux), and over the years its shortcuts have become second nature to me. But I've noticed that when colleagues see my terminal setup and want to try tmux themselves, the keyboard shortcuts are the first barrier. They end up with a cheat sheet pinned to their monitor or open in a browser tab, constantly context-switching away from the terminal.
 
-Then I remembered [Zellij](https://zellij.dev/) and its always-visible shortcut hints bar at the bottom of the screen. No memorization needed - the available actions are right there. What if I could bring that same idea to tmux?
+Recently I gave [Zellij](https://zellij.dev/) a try and immediately noticed its always-visible shortcut hints bar at the bottom of the screen. It's a small thing, but it removes the need for an external reference entirely. I thought: why not bring that same idea to tmux?
 
 ## The Idea: Training Wheels for Tmux
 
@@ -18,13 +18,13 @@ The concept is simple: use tmux's second status line to display a color-coded ba
 - **Blue** for window operations (new, next, prev, list, rename)
 - **Magenta** for pane operations (split, zoom, kill, navigate)
 
-Think of it as training wheels. You keep them on while you're learning, and once the shortcuts become muscle memory, you toggle them off with a single keybinding.
+Think of it as training wheels. Newcomers keep them on while learning, and once the shortcuts become muscle memory, they toggle them off with a single keybinding.
 
-![Tmux with Zellij-style hints bar visible](/images/2026/02/12/tmux-hints-visible.gif)
+![Tmux with Zellij-style shortcut hints bar](/images/2026/02/12/tmux-status-lines.png)
 
 ## Building the Hints Bar
 
-Tmux supports multiple status lines via `set -g status 2`. The first line (`status-format[0]`) is the default status bar showing windows. The second line (`status-format[1]`) is where our hints bar lives.
+Tmux supports multiple status lines via `set -g status 2`. The first line (`status-format[0]`) is the default status bar showing windows. The second line (`status-format[1]`) is where the hints bar lives.
 
 Here's the configuration:
 
@@ -42,7 +42,7 @@ Let me break down what's happening:
 - `#[bg=colour235]` sets the background to a dark grey, giving the bar its own visual identity separate from the main status line
 - Each category label (SESSION, WINDOW, PANE) is displayed in bold with its category color
 - The shortcut keys are shown with colored backgrounds, followed by their action names in white
-- `|` separators visually group related shortcuts
+- `|` separators visually group related shortcuts within a category
 - `||` double separators mark the boundary between categories
 
 ### The Format Pattern
@@ -57,16 +57,14 @@ This creates a pill-like effect where the key stands out against the action desc
 
 ## Adding a Toggle Keybinding
 
-Once you've internalized the shortcuts, the hints bar becomes unnecessary screen real estate. A toggle keybinding lets you hide it:
+For experienced users, the hints bar is unnecessary screen real estate. A toggle keybinding lets you hide it:
 
 ```bash
 # Toggle hints bar with prefix + h
 bind-key h if -F '#{==:#{status},2}' 'set -g status on' 'set -g status 2'
 ```
 
-This uses tmux's conditional format: if the status is currently `2` (both lines visible), switch to `on` (single line). Otherwise, switch back to `2`.
-
-![Toggling the hints bar with prefix + h](/images/2026/02/12/tmux-hints-toggle.gif)
+This uses tmux's conditional format: if the status is currently `2` (both lines visible), switch to `on` (single line). Otherwise, switch back to `2`. Press `Ctrl+b h` to toggle.
 
 ## The Complete Configuration
 
@@ -110,12 +108,12 @@ This configuration is a starting point. A few ideas for customization:
 
 ## Conclusion
 
-Tmux is powerful, but its keyboard-driven interface has a real learning curve. By borrowing Zellij's idea of an always-visible hints bar, you get the best of both worlds: tmux's flexibility and maturity, with a built-in reference that stays out of your way once you no longer need it.
+Tmux has been around since 2007 and remains one of the most powerful terminal multiplexers available. But its keyboard-driven interface has a real learning curve, especially for people coming from GUI-based terminals. By borrowing Zellij's idea of an always-visible hints bar, newcomers get a built-in reference right where they need it, without leaving the terminal.
 
-The `prefix + h` toggle means you're never stuck with the bar permanently - it's training wheels you remove when you're ready.
+The `prefix + h` toggle means the bar is never permanent. It's training wheels you remove when you're ready.
 
 ## Resources
 
 - [Tmux manual - status line](https://man.openbsd.org/tmux#status-format)
 - [Zellij terminal multiplexer](https://zellij.dev/)
-- [My dotfiles](https://github.com/timvw/dotfiles)
+- [Tmux on GitHub](https://github.com/tmux/tmux)

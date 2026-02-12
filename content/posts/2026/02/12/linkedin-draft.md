@@ -4,23 +4,22 @@
 
 **Tmux training wheels: a Zellij-inspired shortcut hints bar**
 
-I recently switched to tmux and kept reaching for a cheat sheet every time I needed to split a pane or switch sessions. It completely broke my flow.
+I've been using tmux for about 15 years now. The shortcuts are second nature to me, but I've noticed that colleagues who see my terminal setup and want to try tmux always hit the same wall: remembering the keybindings.
 
-So I borrowed an idea from Zellij: an always-visible shortcut hints bar built right into tmux's status line.
+After giving Zellij a try recently, I liked how it shows available shortcuts right in the status bar. So I built the same thing for tmux: a color-coded hints bar showing session, window, and pane shortcuts at a glance.
 
-- Color-coded by category (session, window, pane)
-- Shows the most common shortcuts at a glance
-- Toggle it off with a single keybinding once the shortcuts become muscle memory
+- Built into tmux's second status line, no plugins needed
+- Color-coded by category (green = session, blue = window, magenta = pane)
+- Toggle it off with Ctrl+b h once shortcuts become muscle memory
 
-It's training wheels for tmux. Keep them on while learning, remove them when you're ready.
+Training wheels for tmux. Keep them on while learning, remove them when ready.
 
-Full config and walkthrough on the blog: https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/
+Full walkthrough: https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/
 
 #tmux #terminal #productivity #developerexperience #devtools
 
 ---
 
 **Posting notes:**
-- Attach the GIF showing the hints bar toggle (`tmux-hints-toggle.gif`) as the post image/video
-- LinkedIn natively supports GIFs as post attachments
+- Attach the screenshot of the status lines as the post image
 - Best posting times: Tuesday-Thursday, 8-10am local time
