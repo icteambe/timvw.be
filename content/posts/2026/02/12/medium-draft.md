@@ -1,0 +1,121 @@
+# Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar
+
+I recently switched to tmux as my terminal multiplexer. The problem? I kept forgetting the shortcuts. Every time I needed to split a pane or switch sessions, I'd alt-tab to a browser with a cheat sheet open. It completely broke my flow.
+
+Then I remembered [Zellij](https://zellij.dev/) and its always-visible shortcut hints bar at the bottom of the screen. No memorization needed — the available actions are right there. What if I could bring that same idea to tmux?
+
+---
+
+## The Idea: Training Wheels for Tmux
+
+The concept is simple: use tmux's second status line to display a color-coded bar showing the most common shortcuts, grouped by category:
+
+- **Green** for session operations (detach, list, new, rename)
+- **Blue** for window operations (new, next, prev, list, rename)
+- **Magenta** for pane operations (split, zoom, kill, navigate)
+
+Think of it as training wheels. You keep them on while you're learning, and once the shortcuts become muscle memory, you toggle them off with a single keybinding.
+
+![Tmux with Zellij-style hints bar visible](tmux-hints-visible.gif)
+
+*The hints bar shows color-coded shortcuts grouped by category: session (green), window (blue), and pane (magenta).*
+
+---
+
+## Building the Hints Bar
+
+Tmux supports multiple status lines via `set -g status 2`. The first line is the default status bar showing windows. The second line is where our hints bar lives.
+
+Here's the key configuration:
+
+```
+# Enable two status lines
+set -g status 2
+set -g status-interval 1
+
+# Zellij-style shortcut hints on the second status line
+set -g status-format[1] '...'  # (see full config below)
+```
+
+The format string uses tmux's style tags to create a pill-like effect where each shortcut key stands out against its action description:
+
+- `#[bg=green,fg=black] d` — the key in a colored pill
+- `#[bg=colour235,fg=white] Detach` — the action in neutral colors
+- `|` separators between shortcuts, `||` between categories
+
+The `colour235` dark grey background gives the bar its own visual identity, clearly separate from the main status line.
+
+---
+
+## Adding a Toggle
+
+Once you've internalized the shortcuts, the hints bar becomes unnecessary screen real estate. One line gives you a toggle:
+
+```
+# Toggle hints bar with prefix + h
+bind-key h if -F '#{==:#{status},2}' 'set -g status on' 'set -g status 2'
+```
+
+This checks the current state: if the status shows two lines, collapse to one. Otherwise, expand back to two. Simple and stateless.
+
+![Toggling the hints bar with prefix + h](tmux-hints-toggle.gif)
+
+*Press Ctrl+b h to toggle the hints bar on and off.*
+
+---
+
+## The Complete Configuration
+
+Here's the full `~/.tmux.conf`:
+
+```
+set -g mouse on
+set -g history-limit 100000
+bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
+set -g set-clipboard on
+
+set -g renumber-windows on
+
+set -g status-left '#S '
+set -g status-left-length 100
+
+# Custom keybindings
+bind-key a command-prompt -p "New session name:" { new-session -d -s "%%" ; switch-client -t "%%" }
+bind-key h if -F '#{==:#{status},2}' 'set -g status on' 'set -g status 2'
+
+# --- Zellij-style shortcut hints bar ---
+set -g status 2
+set -g status-interval 1
+set -g status-format[1] '#[bg=colour235,fg=white] #[fg=green,bold]SESSION #[bg=green,fg=black] ^b #[bg=colour235,fg=colour245]+ #[bg=green,fg=black] d #[bg=colour235,fg=white] Detach #[fg=colour240]| #[bg=green,fg=black] s #[bg=colour235,fg=white] List #[fg=colour240]| #[bg=green,fg=black] a #[bg=colour235,fg=white] New #[fg=colour240]| #[bg=green,fg=black] $ #[bg=colour235,fg=white] Rename #[fg=colour240]| #[bg=green,fg=black] ( #[bg=colour235,fg=white] Prev #[fg=colour240]| #[bg=green,fg=black] ) #[bg=colour235,fg=white] Next #[fg=colour240]|| #[fg=blue,bold]WINDOW #[bg=blue,fg=white] ^b #[bg=colour235,fg=colour245]+ #[bg=blue,fg=white] c #[bg=colour235,fg=white] New #[fg=colour240]| #[bg=blue,fg=white] n #[bg=colour235,fg=white] Next #[fg=colour240]| #[bg=blue,fg=white] p #[bg=colour235,fg=white] Prev #[fg=colour240]| #[bg=blue,fg=white] w #[bg=colour235,fg=white] List #[fg=colour240]| #[bg=blue,fg=white] , #[bg=colour235,fg=white] Rename #[fg=colour240]|| #[fg=magenta,bold]PANE #[bg=magenta,fg=white] ^b #[bg=colour235,fg=colour245]+ #[bg=magenta,fg=white] % #[bg=colour235,fg=white] VSplit #[fg=colour240]| #[bg=magenta,fg=white] " #[bg=colour235,fg=white] HSplit #[fg=colour240]| #[bg=magenta,fg=white] z #[bg=colour235,fg=white] Zoom #[fg=colour240]| #[bg=magenta,fg=white] x #[bg=colour235,fg=white] Kill #[fg=colour240]| #[bg=magenta,fg=white] o #[bg=colour235,fg=white] Next #[fg=colour240]| #[bg=magenta,fg=white] arrows #[bg=colour235,fg=white] Navigate'
+```
+
+Reload with:
+
+```
+tmux source-file ~/.tmux.conf
+```
+
+---
+
+## Making It Your Own
+
+This configuration is a starting point. A few ideas:
+
+- **Add more shortcuts**: Copy-mode bindings, custom keybindings you've defined
+- **Change colors**: Match your terminal theme
+- **Reorganize**: Group by frequency of use instead of tmux's conceptual model
+- **Custom session keybinding**: The `bind-key a` line adds `prefix + a` to create a new named session — much faster than the default workflow
+
+---
+
+## Conclusion
+
+Tmux is powerful, but its keyboard-driven interface has a real learning curve. By borrowing Zellij's idea of an always-visible hints bar, you get the best of both worlds: tmux's flexibility and maturity, with a built-in reference that stays out of your way once you no longer need it.
+
+The `prefix + h` toggle means you're never stuck with the bar permanently — it's training wheels you remove when you're ready.
+
+---
+
+*Originally published on [timvw.be](https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/).*
+
+**Tags:** tmux, terminal, productivity, developer experience
