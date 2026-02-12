@@ -2,7 +2,7 @@
 title: "wt: A Better Way to Manage Git Worktrees"
 date: 2026-02-12T10:00:00+01:00
 draft: false
-tags: ["git", "worktrees", "cli", "golang", "developer-tools"]
+tags: ["git", "worktrees", "cli", "golang", "developer-tools", "ai", "coding-agents"]
 categories: ["developer-tools"]
 ---
 
@@ -19,6 +19,12 @@ Using `git worktree` directly means you have to:
 - Clean up stale worktrees by hand when branches get merged
 
 It's powerful, but the workflow friction adds up quickly. After a while I found myself avoiding worktrees altogether simply because the ceremony around them was too high.
+
+## Why Worktrees Matter Even More Now
+
+With the rise of AI-assisted development, worktrees have gone from "nice to have" to practically a hard requirement. When you have multiple coding agents working in parallel — each tackling a different task or feature — they each need their own isolated checkout of the repository. You can't have two agents working on the same working directory without them stepping on each other's changes.
+
+Worktrees are the natural solution: each agent gets its own branch in its own directory, with full access to the repository's history, all backed by a single `.git` store. But if managing worktrees manually was already tedious for one developer, imagine doing it for three or four parallel agents. That was the final push I needed to build proper tooling around it.
 
 ## What wt Does
 
@@ -106,8 +112,12 @@ This configures your shell (Bash, Zsh, or PowerShell) so that `wt` automatically
 
 Packages are also available for Linux (deb, rpm, AUR), Windows (Scoop, WinGet), or you can install from source with `go install github.com/timvw/wt@latest`.
 
+## Inspiration
+
+The original inspiration for `wt` came from [Phil Haack](https://haacked.com/)'s [`tree-me`](https://github.com/haacked/tree-me) bash script, which introduced the idea of wrapping worktree management behind a simpler interface. I liked the concept but wanted something cross-platform, with richer features like PR/MR checkout and configurable placement strategies, so I rewrote it in Go.
+
 ## Wrapping Up
 
-`wt` has become a core part of my daily development workflow. The small friction reduction of not having to think about paths and navigation adds up over dozens of branch switches per week. If you use git worktrees (or have been wanting to try them), give it a spin.
+`wt` has become a core part of my daily development workflow — both for my own work and as the backbone for running parallel AI coding agents. The small friction reduction of not having to think about paths and navigation adds up over dozens of branch switches per week. If you use git worktrees (or have been wanting to try them), give it a spin.
 
 The source code is on GitHub: [github.com/timvw/wt](https://github.com/timvw/wt)
