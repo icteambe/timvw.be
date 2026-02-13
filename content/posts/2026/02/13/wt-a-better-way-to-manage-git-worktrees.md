@@ -1,6 +1,6 @@
 ---
 title: "wt: A Better Way to Manage Git Worktrees"
-date: 2026-02-13T10:00:00+01:00
+date: 2026-02-13
 draft: false
 tags: ["git", "worktrees", "cli", "golang", "developer-tools", "ai", "coding-agents"]
 categories: ["developer-tools"]
