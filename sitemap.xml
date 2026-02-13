@@ -5,28 +5,52 @@
     <loc>https://timvw.be/contact/</loc>
     <lastmod>2025-08-20T14:04:54+02:00</lastmod>
   </url><url>
-    <loc>https://timvw.be/categories/</loc>
-    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+    <loc>https://timvw.be/tags/ai/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
   </url><url>
-    <loc>https://timvw.be/tags/developer-experience/</loc>
-    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+    <loc>https://timvw.be/categories/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/cli/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/coding-agents/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/categories/developer-tools/</loc>
-    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/developer-tools/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/git/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/golang/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/posts/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/worktrees/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/2026/02/13/wt-a-better-way-to-manage-git-worktrees/</loc>
+    <lastmod>2026-02-13T08:20:55+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/developer-experience/</loc>
     <lastmod>2026-02-12T13:55:22+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/productivity/</loc>
     <lastmod>2026-02-12T13:55:22+01:00</lastmod>
   </url><url>
-    <loc>https://timvw.be/tags/</loc>
-    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
-  </url><url>
     <loc>https://timvw.be/tags/terminal/</loc>
-    <lastmod>2026-02-12T13:55:22+01:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/</loc>
     <lastmod>2026-02-12T13:55:22+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/tmux/</loc>
@@ -330,9 +354,6 @@
     <lastmod>2021-01-04T22:47:36+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/2012/05/20/add-missing-books-to-itunes/</loc>
-    <lastmod>2021-01-04T22:47:36+01:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/tags/git/</loc>
     <lastmod>2021-01-04T22:47:36+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/itunes/</loc>

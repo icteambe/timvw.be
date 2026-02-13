@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Developer-Tools on Tim Van Wassenhove</title>
+    <link>https://timvw.be/tags/developer-tools/</link>
+    <description>Recent content in Developer-Tools on Tim Van Wassenhove</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Feb 2026 08:20:55 +0100</lastBuildDate>
+    <atom:link href="https://timvw.be/tags/developer-tools/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>wt: A Better Way to Manage Git Worktrees</title>
+      <link>https://timvw.be/2026/02/13/wt-a-better-way-to-manage-git-worktrees/</link>
+      <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2026/02/13/wt-a-better-way-to-manage-git-worktrees/</guid>
+      <description>&lt;p&gt;If you work on multiple branches simultaneously, you&amp;rsquo;ve probably discovered &lt;a href=&#34;https://git-scm.com/docs/git-worktree&#34;&gt;git worktrees&lt;/a&gt;. They let you check out multiple branches at the same time in separate directories, without the overhead of cloning the repository again. The problem is that the built-in commands are tedious to use in practice. I built &lt;a href=&#34;https://github.com/timvw/wt&#34;&gt;wt&lt;/a&gt; to fix that.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-problem-with-vanilla-git-worktrees&#34;&gt;The Problem with Vanilla Git Worktrees&lt;/h2&gt;&#xA;&lt;p&gt;Using &lt;code&gt;git worktree&lt;/code&gt; directly means you have to:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Manually specify full paths every time you create a worktree&lt;/li&gt;&#xA;&lt;li&gt;Remember where you put each worktree on disk&lt;/li&gt;&#xA;&lt;li&gt;Manually &lt;code&gt;cd&lt;/code&gt; into the new directory after creating one&lt;/li&gt;&#xA;&lt;li&gt;Come up with your own naming and organizational conventions&lt;/li&gt;&#xA;&lt;li&gt;Clean up stale worktrees by hand when branches get merged&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;It&amp;rsquo;s powerful, but the workflow friction adds up quickly. After a while I found myself avoiding worktrees altogether simply because the ceremony around them was too high.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

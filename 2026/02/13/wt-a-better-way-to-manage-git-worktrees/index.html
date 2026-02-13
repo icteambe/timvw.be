@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>wt: A Better Way to Manage Git Worktrees - Tim Van Wassenhove</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="wt: A Better Way to Manage Git Worktrees">
+  <meta itemprop="description" content="If you work on multiple branches simultaneously, you’ve probably discovered git worktrees. They let you check out multiple branches at the same time in separate directories, without the overhead of cloning the repository again. The problem is that the built-in commands are tedious to use in practice. I built wt to fix that.
+The Problem with Vanilla Git Worktrees Using git worktree directly means you have to:
+Manually specify full paths every time you create a worktree Remember where you put each worktree on disk Manually cd into the new directory after creating one Come up with your own naming and organizational conventions Clean up stale worktrees by hand when branches get merged It’s powerful, but the workflow friction adds up quickly. After a while I found myself avoiding worktrees altogether simply because the ceremony around them was too high.">
+  <meta itemprop="datePublished" content="2026-02-13T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2026-02-13T08:20:55+01:00">
+  <meta itemprop="wordCount" content="873">
+  <meta itemprop="keywords" content="Git,Worktrees,Cli,Golang,Developer-Tools,Ai,Coding-Agents"><meta property="og:url" content="https://timvw.be/2026/02/13/wt-a-better-way-to-manage-git-worktrees/">
+  <meta property="og:site_name" content="Tim Van Wassenhove">
+  <meta property="og:title" content="wt: A Better Way to Manage Git Worktrees">
+  <meta property="og:description" content="If you work on multiple branches simultaneously, you’ve probably discovered git worktrees. They let you check out multiple branches at the same time in separate directories, without the overhead of cloning the repository again. The problem is that the built-in commands are tedious to use in practice. I built wt to fix that.
+The Problem with Vanilla Git Worktrees Using git worktree directly means you have to:
+Manually specify full paths every time you create a worktree Remember where you put each worktree on disk Manually cd into the new directory after creating one Come up with your own naming and organizational conventions Clean up stale worktrees by hand when branches get merged It’s powerful, but the workflow friction adds up quickly. After a while I found myself avoiding worktrees altogether simply because the ceremony around them was too high.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-13T08:20:55+01:00">
+    <meta property="article:tag" content="Git">
+    <meta property="article:tag" content="Worktrees">
+    <meta property="article:tag" content="Cli">
+    <meta property="article:tag" content="Golang">
+    <meta property="article:tag" content="Developer-Tools">
+    <meta property="article:tag" content="Ai">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="wt: A Better Way to Manage Git Worktrees">
+  <meta name="twitter:description" content="If you work on multiple branches simultaneously, you’ve probably discovered git worktrees. They let you check out multiple branches at the same time in separate directories, without the overhead of cloning the repository again. The problem is that the built-in commands are tedious to use in practice. I built wt to fix that.
+The Problem with Vanilla Git Worktrees Using git worktree directly means you have to:
+Manually specify full paths every time you create a worktree Remember where you put each worktree on disk Manually cd into the new directory after creating one Come up with your own naming and organizational conventions Clean up stale worktrees by hand when branches get merged It’s powerful, but the workflow friction adds up quickly. After a while I found myself avoiding worktrees altogether simply because the ceremony around them was too high.">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://timvw.be/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://timvw.be/js/main.js"></script>
+	<link href="https://github.com/timvw" rel="me">
+    <link href="https://timvw.be/" rel="me">
+    <link href="https://fosstodon.org/@timvw" rel="me">
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://timvw.be/">Tim Van Wassenhove</a></h1>
+	<div class="site-description"><p>Passionate geek, interested in Technology. Proud father of two</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/timvw" title="Github"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/timvanwassenhove" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="https://timvw.be/feed.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a rel="me" href="https://fosstodon.org/@timvw" class="masto-link" ></a></li>
+			</ul>
+		
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="../../../../">Home</a>
+			</li>
+			
+			<li>
+				<a href="../../../../posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="../../../../tags">Tags</a>
+			</li>
+			
+			<li>
+				<a href="../../../../contact/">Contact</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">13</span>
+							<span class="rest">Feb 2026</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">wt: A Better Way to Manage Git Worktrees</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>If you work on multiple branches simultaneously, you&rsquo;ve probably discovered <a href="https://git-scm.com/docs/git-worktree">git worktrees</a>. They let you check out multiple branches at the same time in separate directories, without the overhead of cloning the repository again. The problem is that the built-in commands are tedious to use in practice. I built <a href="https://github.com/timvw/wt">wt</a> to fix that.</p>
+<h2 id="the-problem-with-vanilla-git-worktrees">The Problem with Vanilla Git Worktrees</h2>
+<p>Using <code>git worktree</code> directly means you have to:</p>
+<ul>
+<li>Manually specify full paths every time you create a worktree</li>
+<li>Remember where you put each worktree on disk</li>
+<li>Manually <code>cd</code> into the new directory after creating one</li>
+<li>Come up with your own naming and organizational conventions</li>
+<li>Clean up stale worktrees by hand when branches get merged</li>
+</ul>
+<p>It&rsquo;s powerful, but the workflow friction adds up quickly. After a while I found myself avoiding worktrees altogether simply because the ceremony around them was too high.</p>
+<h2 id="why-worktrees-matter-even-more-now">Why Worktrees Matter Even More Now</h2>
+<p>With the rise of AI-assisted development, worktrees have gone from &ldquo;nice to have&rdquo; to practically a hard requirement. When you have multiple coding agents working in parallel — each tackling a different task or feature — they each need their own isolated checkout of the repository. You can&rsquo;t have two agents working on the same working directory without them stepping on each other&rsquo;s changes.</p>
+<p>And it&rsquo;s not just about a single repository. Most real-world tasks span multiple repos: updating a shared library and the application that consumes it, changing an API and the frontend that calls it, modifying infrastructure and the service that runs on it. Each agent (or human) working on a task needs a separate worktree in <em>each</em> of those repositories.</p>
+<p><code>wt</code> handles this with a custom pattern that groups worktrees by task instead of by repo:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#57606a"># ~/.config/wt/config.toml</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">strategy</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;custom&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">pattern</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;{.worktreeRoot}/{.branch}/{.repo.Name}&#34;</span>
+</span></span></code></pre></div><p>Use the same branch name across repositories:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/src/shared-lib
+</span></span><span style="display:flex;"><span>wt create feat/PROJ-123
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> ~/src/main-app
+</span></span><span style="display:flex;"><span>wt create feat/PROJ-123
+</span></span></code></pre></div><p>And everything for that task ends up in one place:</p>
+<pre tabindex="0"><code>~/dev/worktrees/
+  feat/PROJ-123/
+    shared-lib/
+    main-app/
+</code></pre><p>This makes it trivial to spin up (and tear down) an isolated workspace for each parallel stream of work. If managing worktrees manually was already tedious for one developer in one repo, imagine doing it across multiple repos for three or four parallel agents. That was the final push I needed to build proper tooling around it.</p>
+<h2 id="what-wt-does">What wt Does</h2>
+<p><code>wt</code> wraps git worktree with an opinionated, ergonomic interface. It handles the path management, shell navigation, and lifecycle for you. The core idea is simple: you tell <code>wt</code> the branch name and it takes care of the rest.</p>
+<h3 id="creating-and-navigating-worktrees">Creating and Navigating Worktrees</h3>
+<p>With shell integration enabled (<code>wt init</code>), creating a new worktree and navigating to it is a single command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wt create feat/add-oauth
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># You&#39;re now inside ~/dev/worktrees/my-repo/feat/add-oauth</span>
+</span></span></code></pre></div><p>Want to check out an existing remote branch? Same deal:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wt checkout fix/timeout-bug
+</span></span></code></pre></div><p>Running <code>wt co</code> without arguments presents an interactive selection menu, so you can pick a branch with arrow keys instead of typing the full name.</p>
+<h3 id="checking-out-pull-requests-and-merge-requests">Checking Out Pull Requests and Merge Requests</h3>
+<p>This is one of the features I use most. Need to review a GitHub PR locally?</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wt pr <span style="color:#0550ae">42</span>
+</span></span></code></pre></div><p>That resolves the PR&rsquo;s branch name via the <code>gh</code> CLI and creates a worktree for it. The same works for GitLab merge requests:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wt mr <span style="color:#0550ae">15</span>
+</span></span></code></pre></div><h3 id="cleanup">Cleanup</h3>
+<p>When branches get merged, their worktrees become stale. Instead of tracking them down manually:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wt cleanup
+</span></span></code></pre></div><p>This removes worktrees for branches that have already been merged into your main branch.</p>
+<h2 id="configurable-organization">Configurable Organization</h2>
+<p>By default, <code>wt</code> places worktrees under <code>~/dev/worktrees/&lt;repo&gt;/&lt;branch&gt;</code>. But the placement strategy is fully configurable. There are seven built-in strategies, and you can define custom patterns using Go template syntax:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#57606a"># ~/.config/wt/config.toml</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">strategy</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;custom&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">pattern</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;{.worktreeRoot}/{.repo.Owner}/{.repo.Name}/{.branch}&#34;</span>
+</span></span></code></pre></div><p>Template variables include <code>{.repo.Name}</code>, <code>{.repo.Owner}</code>, <code>{.repo.Host}</code>, <code>{.branch}</code>, and even <code>{.env.VARNAME}</code> for environment variable interpolation. The last one is useful for grouping worktrees by ticket number across multiple repositories.</p>
+<h2 id="hooks">Hooks</h2>
+<p><code>wt</code> supports pre- and post-hooks for create, checkout, and remove operations. A common use case is copying environment files or installing dependencies when a new worktree is created:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">hooks</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">post_create</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;cp ../.env .env&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;npm install&#34;</span><span style="color:#1f2328">]</span>
+</span></span></code></pre></div><p>Pre-hooks abort the operation on failure. Post-hooks only warn, so they don&rsquo;t block your workflow.</p>
+<h2 id="installation">Installation</h2>
+<p>The quickest way to install on macOS:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install timvw/tap/wt
+</span></span></code></pre></div><p>After installing, set up shell integration:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wt init
+</span></span></code></pre></div><p>This configures your shell (Bash, Zsh, or PowerShell) so that <code>wt</code> automatically navigates you into new worktrees.</p>
+<p>Packages are also available for Linux (deb, rpm, AUR), Windows (Scoop, WinGet), or you can install from source with <code>go install github.com/timvw/wt@latest</code>.</p>
+<h2 id="inspiration">Inspiration</h2>
+<p>The original inspiration for <code>wt</code> came from <a href="https://haacked.com/">Phil Haack</a>&rsquo;s <a href="https://github.com/haacked/tree-me"><code>tree-me</code></a> bash script, which introduced the idea of wrapping worktree management behind a simpler interface. I liked the concept but wanted something cross-platform, with richer features like PR/MR checkout and configurable placement strategies, so I rewrote it in Go.</p>
+<h2 id="wrapping-up">Wrapping Up</h2>
+<p><code>wt</code> has become a core part of my daily development workflow — both for my own work and as the backbone for running parallel AI coding agents. The small friction reduction of not having to think about paths and navigation adds up over dozens of branch switches per week. If you use git worktrees (or have been wanting to try them), give it a spin.</p>
+<p>The source code is on GitHub: <a href="https://github.com/timvw/wt">github.com/timvw/wt</a></p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="../../../../tags/git">git</a></li>
+							
+							<li><a href="../../../../tags/worktrees">worktrees</a></li>
+							
+							<li><a href="../../../../tags/cli">cli</a></li>
+							
+							<li><a href="../../../../tags/golang">golang</a></li>
+							
+							<li><a href="../../../../tags/developer-tools">developer-tools</a></li>
+							
+							<li><a href="../../../../tags/ai">ai</a></li>
+							
+							<li><a href="../../../../tags/coding-agents">coding-agents</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DP4SV12YW"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9DP4SV12YW');
+        }
+      </script><script>feather.replace()</script>
+</body>
+</html>
