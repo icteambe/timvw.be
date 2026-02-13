@@ -24,7 +24,36 @@ It's powerful, but the workflow friction adds up quickly. After a while I found 
 
 With the rise of AI-assisted development, worktrees have gone from "nice to have" to practically a hard requirement. When you have multiple coding agents working in parallel — each tackling a different task or feature — they each need their own isolated checkout of the repository. You can't have two agents working on the same working directory without them stepping on each other's changes.
 
-Worktrees are the natural solution: each agent gets its own branch in its own directory, with full access to the repository's history, all backed by a single `.git` store. But if managing worktrees manually was already tedious for one developer, imagine doing it for three or four parallel agents. That was the final push I needed to build proper tooling around it.
+And it's not just about a single repository. Most real-world tasks span multiple repos: updating a shared library and the application that consumes it, changing an API and the frontend that calls it, modifying infrastructure and the service that runs on it. Each agent (or human) working on a task needs a separate worktree in *each* of those repositories.
+
+`wt` handles this with a custom pattern that groups worktrees by task instead of by repo:
+
+```toml
+# ~/.config/wt/config.toml
+strategy = "custom"
+pattern = "{.worktreeRoot}/{.branch}/{.repo.Name}"
+```
+
+Use the same branch name across repositories:
+
+```bash
+cd ~/src/shared-lib
+wt create feat/PROJ-123
+
+cd ~/src/main-app
+wt create feat/PROJ-123
+```
+
+And everything for that task ends up in one place:
+
+```
+~/dev/worktrees/
+  feat/PROJ-123/
+    shared-lib/
+    main-app/
+```
+
+This makes it trivial to spin up (and tear down) an isolated workspace for each parallel stream of work. If managing worktrees manually was already tedious for one developer in one repo, imagine doing it across multiple repos for three or four parallel agents. That was the final push I needed to build proper tooling around it.
 
 ## What wt Does
 
