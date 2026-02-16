@@ -6,8 +6,15 @@
     <description>Recent content in Productivity on Tim Van Wassenhove</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Feb 2026 13:55:22 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 16 Feb 2026 19:39:01 +0100</lastBuildDate>
     <atom:link href="https://timvw.be/tags/productivity/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Never Lose an AI Coding Session Again</title>
+      <link>https://timvw.be/2026/02/16/never-lose-an-ai-coding-session-again/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2026/02/16/never-lose-an-ai-coding-session-again/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;re at an inflection point for software development. AI coding assistants &amp;ndash; Claude Code, OpenCode, Codex CLI &amp;ndash; have crossed the threshold from novelty to genuine productivity multiplier. Developers who lean into these tools are shipping products faster and at higher quality, not because the AI writes perfect code, but because it handles the grunt work while you focus on architecture, decisions, and review.&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re running these tools seriously, you&amp;rsquo;re probably running multiple of them in parallel: one per project, one per task. &lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;tmux&lt;/a&gt; is the natural home for this workflow &amp;ndash; split panes, named sessions, scriptable, works over SSH. If you&amp;rsquo;re new to tmux, I wrote about &lt;a href=&#34;../../2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/&#34;&gt;training wheels to ease the learning curve&lt;/a&gt;, and &lt;a href=&#34;../../2026/02/13/wt-a-better-way-to-manage-git-worktrees/&#34;&gt;wt&lt;/a&gt; makes managing parallel worktrees painless.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Tmux Training Wheels: A Zellij-Inspired Shortcut Hints Bar</title>
       <link>https://timvw.be/2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/</link>

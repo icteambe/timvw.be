@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Never Lose an AI Coding Session Again - Tim Van Wassenhove</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="Never Lose an AI Coding Session Again">
+  <meta itemprop="description" content="We’re at an inflection point for software development. AI coding assistants – Claude Code, OpenCode, Codex CLI – have crossed the threshold from novelty to genuine productivity multiplier. Developers who lean into these tools are shipping products faster and at higher quality, not because the AI writes perfect code, but because it handles the grunt work while you focus on architecture, decisions, and review.
+If you’re running these tools seriously, you’re probably running multiple of them in parallel: one per project, one per task. tmux is the natural home for this workflow – split panes, named sessions, scriptable, works over SSH. If you’re new to tmux, I wrote about training wheels to ease the learning curve, and wt makes managing parallel worktrees painless.">
+  <meta itemprop="datePublished" content="2026-02-16T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2026-02-16T19:39:01+01:00">
+  <meta itemprop="wordCount" content="757">
+  <meta itemprop="keywords" content="Tmux,Ai,Coding-Agents,Claude-Code,Opencode,Codex,Developer-Tools,Productivity"><meta property="og:url" content="https://timvw.be/2026/02/16/never-lose-an-ai-coding-session-again/">
+  <meta property="og:site_name" content="Tim Van Wassenhove">
+  <meta property="og:title" content="Never Lose an AI Coding Session Again">
+  <meta property="og:description" content="We’re at an inflection point for software development. AI coding assistants – Claude Code, OpenCode, Codex CLI – have crossed the threshold from novelty to genuine productivity multiplier. Developers who lean into these tools are shipping products faster and at higher quality, not because the AI writes perfect code, but because it handles the grunt work while you focus on architecture, decisions, and review.
+If you’re running these tools seriously, you’re probably running multiple of them in parallel: one per project, one per task. tmux is the natural home for this workflow – split panes, named sessions, scriptable, works over SSH. If you’re new to tmux, I wrote about training wheels to ease the learning curve, and wt makes managing parallel worktrees painless.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-16T19:39:01+01:00">
+    <meta property="article:tag" content="Tmux">
+    <meta property="article:tag" content="Ai">
+    <meta property="article:tag" content="Coding-Agents">
+    <meta property="article:tag" content="Claude-Code">
+    <meta property="article:tag" content="Opencode">
+    <meta property="article:tag" content="Codex">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Never Lose an AI Coding Session Again">
+  <meta name="twitter:description" content="We’re at an inflection point for software development. AI coding assistants – Claude Code, OpenCode, Codex CLI – have crossed the threshold from novelty to genuine productivity multiplier. Developers who lean into these tools are shipping products faster and at higher quality, not because the AI writes perfect code, but because it handles the grunt work while you focus on architecture, decisions, and review.
+If you’re running these tools seriously, you’re probably running multiple of them in parallel: one per project, one per task. tmux is the natural home for this workflow – split panes, named sessions, scriptable, works over SSH. If you’re new to tmux, I wrote about training wheels to ease the learning curve, and wt makes managing parallel worktrees painless.">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://timvw.be/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://timvw.be/js/main.js"></script>
+	<link href="https://github.com/timvw" rel="me">
+    <link href="https://timvw.be/" rel="me">
+    <link href="https://fosstodon.org/@timvw" rel="me">
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://timvw.be/">Tim Van Wassenhove</a></h1>
+	<div class="site-description"><p>Passionate geek, interested in Technology. Proud father of two</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/timvw" title="Github"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/timvanwassenhove" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="https://timvw.be/feed.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a rel="me" href="https://fosstodon.org/@timvw" class="masto-link" ></a></li>
+			</ul>
+		
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="../../../../">Home</a>
+			</li>
+			
+			<li>
+				<a href="../../../../posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="../../../../tags">Tags</a>
+			</li>
+			
+			<li>
+				<a href="../../../../contact/">Contact</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">16</span>
+							<span class="rest">Feb 2026</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">Never Lose an AI Coding Session Again</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>We&rsquo;re at an inflection point for software development. AI coding assistants &ndash; Claude Code, OpenCode, Codex CLI &ndash; have crossed the threshold from novelty to genuine productivity multiplier. Developers who lean into these tools are shipping products faster and at higher quality, not because the AI writes perfect code, but because it handles the grunt work while you focus on architecture, decisions, and review.</p>
+<p>If you&rsquo;re running these tools seriously, you&rsquo;re probably running multiple of them in parallel: one per project, one per task. <a href="https://github.com/tmux/tmux">tmux</a> is the natural home for this workflow &ndash; split panes, named sessions, scriptable, works over SSH. If you&rsquo;re new to tmux, I wrote about <a href="../../../../2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/">training wheels to ease the learning curve</a>, and <a href="../../../../2026/02/13/wt-a-better-way-to-manage-git-worktrees/">wt</a> makes managing parallel worktrees painless.</p>
+<p>With <a href="https://github.com/tmux-plugins/tmux-resurrect">tmux-resurrect</a> and <a href="https://github.com/tmux-plugins/tmux-continuum">tmux-continuum</a>, your pane layouts survive restarts. But there&rsquo;s a gap.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>When tmux restarts &ndash; reboot, crash, <code>kill-server</code> &ndash; tmux-resurrect faithfully recreates your windows and panes. But the AI sessions that were running inside them are gone. Your Claude conversation about the refactoring plan, the OpenCode session mid-way through a feature, the Codex session that had full context on your codebase &ndash; all lost. You&rsquo;re left re-launching each assistant manually and hoping you remember which session ID belongs to which project.</p>
+<p>With three to five assistants spread across projects, this gets old fast.</p>
+<h2 id="the-solution-tmux-assistant-resurrect">The Solution: tmux-assistant-resurrect</h2>
+<p><a href="https://github.com/timvw/tmux-assistant-resurrect">tmux-assistant-resurrect</a> is a tmux plugin that automatically saves and restores AI coding assistant sessions across tmux restarts. It hooks into tmux-resurrect&rsquo;s save/restore cycle so you don&rsquo;t have to think about it.</p>
+<pre tabindex="0"><code>SAVE (every 5 min via continuum, or prefix + Ctrl-s)
+  tmux-resurrect saves pane layouts
+    -&gt; detects running assistants by process inspection
+    -&gt; extracts session IDs via native hooks/plugins
+    -&gt; writes assistant-sessions.json
+
+RESTORE (on tmux start, or prefix + Ctrl-r)
+  tmux-resurrect restores pane layouts
+    -&gt; reads saved session IDs
+    -&gt; resumes each assistant with the correct flag:
+         claude --resume &lt;session-id&gt;
+         opencode -s &lt;session-id&gt;
+         codex resume &lt;session-id&gt;
+</code></pre><p>Three tools are supported today:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Tool</th>
+          <th>Resume command</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a href="https://github.com/anthropics/claude-code">Claude Code</a></td>
+          <td><code>claude --resume &lt;id&gt;</code></td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/opencode-ai/opencode">OpenCode</a></td>
+          <td><code>opencode -s &lt;id&gt;</code></td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/openai/codex">Codex CLI</a></td>
+          <td><code>codex resume &lt;id&gt;</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="how-it-works">How It Works</h2>
+<p>A few technical choices that matter:</p>
+<ul>
+<li><strong>No wrapper scripts.</strong> The plugin uses each tool&rsquo;s native hook or plugin system (Claude&rsquo;s <code>SessionStart</code> hook, OpenCode&rsquo;s plugin API, Codex&rsquo;s JSONL file) to track session IDs. Your workflow stays unchanged.</li>
+<li><strong>Direct process inspection.</strong> Detection takes a single <code>ps</code> snapshot and matches child processes of each pane&rsquo;s shell against known binary names. No heuristics, no screen scraping &ndash; fast and deterministic.</li>
+<li><strong>Two-guard restore safety.</strong> Before sending a resume command to a pane, the plugin checks that (1) the pane is running a shell, and (2) no assistant is already running there. This prevents typing into TUIs or double-launching.</li>
+<li><strong>POSIX-safe quoting.</strong> All values sent via <code>tmux send-keys</code> are safely quoted for bash, zsh, fish, and other shells.</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Install <a href="https://github.com/tmux-plugins/tpm">TPM</a> if you haven&rsquo;t already, then add to your <code>~/.tmux.conf</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">set</span> -g @plugin <span style="color:#0a3069">&#39;tmux-plugins/tpm&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">set</span> -g @plugin <span style="color:#0a3069">&#39;tmux-plugins/tmux-resurrect&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">set</span> -g @plugin <span style="color:#0a3069">&#39;tmux-plugins/tmux-continuum&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">set</span> -g @plugin <span style="color:#0a3069">&#39;timvw/tmux-assistant-resurrect&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Initialize TPM (must be last line)</span>
+</span></span><span style="display:flex;"><span>run <span style="color:#0a3069">&#39;~/.tmux/plugins/tpm/tpm&#39;</span>
+</span></span></code></pre></div><p>Inside tmux, press <code>prefix + I</code>. TPM installs the plugin and automatically configures Claude hooks, the OpenCode plugin, and continuum&rsquo;s auto-save interval.</p>
+<h2 id="try-it">Try It</h2>
+<ol>
+<li><strong>Launch</strong> a few assistants in separate tmux panes, as you normally would.</li>
+<li><strong>Save</strong> with <code>prefix + Ctrl-s</code>. Inspect what was captured:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat ~/.tmux/resurrect/assistant-sessions.json <span style="color:#1f2328">|</span> jq .
+</span></span></code></pre></div><ol start="3">
+<li><strong>Kill tmux</strong> to simulate a reboot: <code>tmux kill-server</code></li>
+<li><strong>Start tmux</strong> again and <strong>restore</strong> with <code>prefix + Ctrl-r</code>.</li>
+<li><strong>Verify</strong> &ndash; each assistant should resume its previous conversation in the correct directory.</li>
+</ol>
+<p>Check the restore log if you want to see what happened:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat ~/.tmux/resurrect/assistant-restore.log
+</span></span></code></pre></div><h2 id="built-over-a-weekend">Built Over a Weekend</h2>
+<p>I built this over a weekend, and the project itself was entirely vibecoded &ndash; designed and implemented through conversation with AI coding assistants. It has 100+ automated tests running in Docker with real CLI binaries (<code>@anthropic-ai/claude-code</code>, <code>opencode-ai</code>, <code>@openai/codex</code>). No mocks, no API keys needed for testing.</p>
+<p>That said, it has limited real-world usage so far. Expect rough edges. It&rsquo;s <a href="https://github.com/timvw/tmux-assistant-resurrect/blob/main/LICENSE">MIT licensed</a> and contributions are welcome.</p>
+<h2 id="whats-next">What&rsquo;s Next</h2>
+<p>Saving and restoring sessions is half the problem. When you have multiple agents running in parallel, they frequently get blocked waiting for human input &ndash; confirmation dialogs, permission prompts, or just waiting at their input prompt. I&rsquo;m working on a supervisor tool that detects blocked agents and helps you unblock them. More on that soon.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/timvw/tmux-assistant-resurrect">tmux-assistant-resurrect on GitHub</a></li>
+<li><a href="../../../../2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/">Tmux Training Wheels</a> &ndash; getting started with tmux</li>
+<li><a href="../../../../2026/02/13/wt-a-better-way-to-manage-git-worktrees/">wt: A Better Way to Manage Git Worktrees</a> &ndash; parallel worktrees for parallel agents</li>
+<li><a href="https://github.com/tmux-plugins/tmux-resurrect">tmux-resurrect</a> &ndash; persist tmux layouts</li>
+<li><a href="https://github.com/tmux-plugins/tmux-continuum">tmux-continuum</a> &ndash; auto-save and auto-restore</li>
+</ul>
+
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="../../../../tags/tmux">tmux</a></li>
+							
+							<li><a href="../../../../tags/ai">ai</a></li>
+							
+							<li><a href="../../../../tags/coding-agents">coding-agents</a></li>
+							
+							<li><a href="../../../../tags/claude-code">claude-code</a></li>
+							
+							<li><a href="../../../../tags/opencode">opencode</a></li>
+							
+							<li><a href="../../../../tags/codex">codex</a></li>
+							
+							<li><a href="../../../../tags/developer-tools">developer-tools</a></li>
+							
+							<li><a href="../../../../tags/productivity">productivity</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DP4SV12YW"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9DP4SV12YW');
+        }
+      </script><script>feather.replace()</script>
+</body>
+</html>

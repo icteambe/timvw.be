@@ -6,7 +6,7 @@
     <description>Recent content on Tim Van Wassenhove</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Feb 2026 08:20:55 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 16 Feb 2026 19:39:01 +0100</lastBuildDate>
     <atom:link href="https://timvw.be/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Contact</title>
@@ -14,6 +14,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://timvw.be/contact/</guid>
       <description>&lt;div style=&#34;text-align: center; margin: 2em 0;&#34;&gt;&#xA;    &lt;img src=&#34;./images/tim-avatar.png&#34; alt=&#34;Tim Van Wassenhove&#34; style=&#34;width: 200px; height: 200px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);&#34;&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;mail&#34;&gt;&lt;/i&gt; &lt;a href=&#34;mailto:tim@timvw.be&#34;&gt;tim@timvw.be&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;phone&#34;&gt;&lt;/i&gt; &lt;a href=&#34;tel:+32473998552&#34;&gt;+32 473 998 552&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;globe&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://timvw.be/&#34;&gt;timvw.be&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/timvw&#34;&gt;@timvw&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;linkedin&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.linkedin.com/in/timvanwassenhove&#34;&gt;Tim Van Wassenhove&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;i data-feather=&#34;at-sign&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://fosstodon.org/@timvw&#34;&gt;@timvw@fosstodon.org&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div style=&#34;margin: 2em 0; text-align: center;&#34;&gt;&#xA;    &lt;a href=&#34;./tim-van-wassenhove.vcf&#34; download style=&#34;display: inline-block; padding: 10px 20px; background-color: #333; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;&#34;&gt;&#xA;        📇 Download vCard&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;div style=&#34;margin-top: 3em; padding-top: 2em; border-top: 1px solid #ddd;&#34;&gt;&#xA;    &lt;small&gt;Add my contact information to your address book by downloading the vCard above.&lt;/small&gt;&#xA;&lt;/div&gt;&#xA;&lt;script&gt;&#xA;  feather.replace()&#xA;&lt;/script&gt;</description>
+    </item>
+    <item>
+      <title>Never Lose an AI Coding Session Again</title>
+      <link>https://timvw.be/2026/02/16/never-lose-an-ai-coding-session-again/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2026/02/16/never-lose-an-ai-coding-session-again/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;re at an inflection point for software development. AI coding assistants &amp;ndash; Claude Code, OpenCode, Codex CLI &amp;ndash; have crossed the threshold from novelty to genuine productivity multiplier. Developers who lean into these tools are shipping products faster and at higher quality, not because the AI writes perfect code, but because it handles the grunt work while you focus on architecture, decisions, and review.&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re running these tools seriously, you&amp;rsquo;re probably running multiple of them in parallel: one per project, one per task. &lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;tmux&lt;/a&gt; is the natural home for this workflow &amp;ndash; split panes, named sessions, scriptable, works over SSH. If you&amp;rsquo;re new to tmux, I wrote about &lt;a href=&#34;./2026/02/12/tmux-training-wheels-a-zellij-inspired-shortcut-hints-bar/&#34;&gt;training wheels to ease the learning curve&lt;/a&gt;, and &lt;a href=&#34;./2026/02/13/wt-a-better-way-to-manage-git-worktrees/&#34;&gt;wt&lt;/a&gt; makes managing parallel worktrees painless.&lt;/p&gt;</description>
     </item>
     <item>
       <title>wt: A Better Way to Manage Git Worktrees</title>

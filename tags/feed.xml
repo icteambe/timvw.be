@@ -6,13 +6,62 @@
     <description>Recent content in Tags on Tim Van Wassenhove</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Feb 2026 08:20:55 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 16 Feb 2026 19:39:01 +0100</lastBuildDate>
     <atom:link href="https://timvw.be/tags/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ai</title>
       <link>https://timvw.be/tags/ai/</link>
-      <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
       <guid>https://timvw.be/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Claude-Code</title>
+      <link>https://timvw.be/tags/claude-code/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/tags/claude-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Codex</title>
+      <link>https://timvw.be/tags/codex/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/tags/codex/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Coding-Agents</title>
+      <link>https://timvw.be/tags/coding-agents/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/tags/coding-agents/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Developer-Tools</title>
+      <link>https://timvw.be/tags/developer-tools/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/tags/developer-tools/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Opencode</title>
+      <link>https://timvw.be/tags/opencode/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/tags/opencode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Productivity</title>
+      <link>https://timvw.be/tags/productivity/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/tags/productivity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tmux</title>
+      <link>https://timvw.be/tags/tmux/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/tags/tmux/</guid>
       <description></description>
     </item>
     <item>
@@ -20,20 +69,6 @@
       <link>https://timvw.be/tags/cli/</link>
       <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
       <guid>https://timvw.be/tags/cli/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Coding-Agents</title>
-      <link>https://timvw.be/tags/coding-agents/</link>
-      <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://timvw.be/tags/coding-agents/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Developer-Tools</title>
-      <link>https://timvw.be/tags/developer-tools/</link>
-      <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://timvw.be/tags/developer-tools/</guid>
       <description></description>
     </item>
     <item>
@@ -65,24 +100,10 @@
       <description></description>
     </item>
     <item>
-      <title>Productivity</title>
-      <link>https://timvw.be/tags/productivity/</link>
-      <pubDate>Thu, 12 Feb 2026 10:00:00 +0100</pubDate>
-      <guid>https://timvw.be/tags/productivity/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Terminal</title>
       <link>https://timvw.be/tags/terminal/</link>
       <pubDate>Thu, 12 Feb 2026 10:00:00 +0100</pubDate>
       <guid>https://timvw.be/tags/terminal/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Tmux</title>
-      <link>https://timvw.be/tags/tmux/</link>
-      <pubDate>Thu, 12 Feb 2026 10:00:00 +0100</pubDate>
-      <guid>https://timvw.be/tags/tmux/</guid>
       <description></description>
     </item>
     <item>
