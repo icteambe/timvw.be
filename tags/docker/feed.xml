@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on Tim Van Wassenhove</title>
+    <link>https://timvw.be/tags/docker/</link>
+    <description>Recent content in Docker on Tim Van Wassenhove</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Feb 2026 02:47:53 +0100</lastBuildDate>
+    <atom:link href="https://timvw.be/tags/docker/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Keep Your Bose SoundTouch Speaker Alive After the Shutdown</title>
+      <link>https://timvw.be/2026/02/17/keep-your-bose-soundtouch-speaker-alive-after-the-shutdown/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2026/02/17/keep-your-bose-soundtouch-speaker-alive-after-the-shutdown/</guid>
+      <description>&lt;p&gt;Bose is shutting down the SoundTouch cloud servers on &lt;a href=&#34;https://www.bose.co.uk/en_gb/landing_pages/soundtouch-eol.html&#34;&gt;May 6, 2026&lt;/a&gt;. Once they do, your TuneIn presets stop working, the SoundTouch app loses most functionality, and you can no longer configure presets.&lt;/p&gt;&#xA;&lt;p&gt;The good news: you can fix all of this. &lt;a href=&#34;https://github.com/timvw/soundcork&#34;&gt;SoundCork&lt;/a&gt; is a self-hosted replacement for the Bose cloud servers. It runs on anything — a Raspberry Pi, a NAS, a Docker host, a Kubernetes cluster. Your speaker talks to your server instead of Bose, and everything keeps working.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

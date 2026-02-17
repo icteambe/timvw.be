@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Keep Your Bose SoundTouch Speaker Alive After the Shutdown - Tim Van Wassenhove</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="Keep Your Bose SoundTouch Speaker Alive After the Shutdown">
+  <meta itemprop="description" content="Bose is shutting down the SoundTouch cloud servers on May 6, 2026. Once they do, your TuneIn presets stop working, the SoundTouch app loses most functionality, and you can no longer configure presets.
+The good news: you can fix all of this. SoundCork is a self-hosted replacement for the Bose cloud servers. It runs on anything — a Raspberry Pi, a NAS, a Docker host, a Kubernetes cluster. Your speaker talks to your server instead of Bose, and everything keeps working.">
+  <meta itemprop="datePublished" content="2026-02-17T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2026-02-17T02:47:53+01:00">
+  <meta itemprop="wordCount" content="677">
+  <meta itemprop="keywords" content="Bose,Soundtouch,Self-Hosting,Reverse-Engineering,Docker"><meta property="og:url" content="https://timvw.be/2026/02/17/keep-your-bose-soundtouch-speaker-alive-after-the-shutdown/">
+  <meta property="og:site_name" content="Tim Van Wassenhove">
+  <meta property="og:title" content="Keep Your Bose SoundTouch Speaker Alive After the Shutdown">
+  <meta property="og:description" content="Bose is shutting down the SoundTouch cloud servers on May 6, 2026. Once they do, your TuneIn presets stop working, the SoundTouch app loses most functionality, and you can no longer configure presets.
+The good news: you can fix all of this. SoundCork is a self-hosted replacement for the Bose cloud servers. It runs on anything — a Raspberry Pi, a NAS, a Docker host, a Kubernetes cluster. Your speaker talks to your server instead of Bose, and everything keeps working.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-17T02:47:53+01:00">
+    <meta property="article:tag" content="Bose">
+    <meta property="article:tag" content="Soundtouch">
+    <meta property="article:tag" content="Self-Hosting">
+    <meta property="article:tag" content="Reverse-Engineering">
+    <meta property="article:tag" content="Docker">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Keep Your Bose SoundTouch Speaker Alive After the Shutdown">
+  <meta name="twitter:description" content="Bose is shutting down the SoundTouch cloud servers on May 6, 2026. Once they do, your TuneIn presets stop working, the SoundTouch app loses most functionality, and you can no longer configure presets.
+The good news: you can fix all of this. SoundCork is a self-hosted replacement for the Bose cloud servers. It runs on anything — a Raspberry Pi, a NAS, a Docker host, a Kubernetes cluster. Your speaker talks to your server instead of Bose, and everything keeps working.">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://timvw.be/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://timvw.be/js/main.js"></script>
+	<link href="https://github.com/timvw" rel="me">
+    <link href="https://timvw.be/" rel="me">
+    <link href="https://fosstodon.org/@timvw" rel="me">
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://timvw.be/">Tim Van Wassenhove</a></h1>
+	<div class="site-description"><p>Passionate geek, interested in Technology. Proud father of two</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/timvw" title="Github"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/timvanwassenhove" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="https://timvw.be/feed.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a rel="me" href="https://fosstodon.org/@timvw" class="masto-link" ></a></li>
+			</ul>
+		
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="../../../../">Home</a>
+			</li>
+			
+			<li>
+				<a href="../../../../posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="../../../../tags">Tags</a>
+			</li>
+			
+			<li>
+				<a href="../../../../contact/">Contact</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">17</span>
+							<span class="rest">Feb 2026</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">Keep Your Bose SoundTouch Speaker Alive After the Shutdown</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>Bose is shutting down the SoundTouch cloud servers on <a href="https://www.bose.co.uk/en_gb/landing_pages/soundtouch-eol.html">May 6, 2026</a>. Once they do, your TuneIn presets stop working, the SoundTouch app loses most functionality, and you can no longer configure presets.</p>
+<p>The good news: you can fix all of this. <a href="https://github.com/timvw/soundcork">SoundCork</a> is a self-hosted replacement for the Bose cloud servers. It runs on anything — a Raspberry Pi, a NAS, a Docker host, a Kubernetes cluster. Your speaker talks to your server instead of Bose, and everything keeps working.</p>
+<p>This post walks through the setup. It took me about an hour from start to finish with a SoundTouch 20.</p>
+<h2 id="what-still-works-without-any-changes">What Still Works Without Any Changes</h2>
+<p>These features are independent of the cloud servers:</p>
+<ul>
+<li><strong>Spotify Connect</strong> — cast from the Spotify app to your speaker</li>
+<li><strong>Bluetooth</strong> and <strong>AUX</strong> input</li>
+<li><strong>AirPlay</strong> (on supported models)</li>
+<li>The speaker&rsquo;s <strong>local API on port 8090</strong> — <a href="https://github.com/timvw/bose">bose</a> is a CLI tool I wrote that uses this for volume, presets, power control</li>
+</ul>
+<h2 id="what-breaks-and-what-soundcork-fixes">What Breaks (And What SoundCork Fixes)</h2>
+<ul>
+<li><strong>TuneIn radio presets</strong> — the BMX server that resolves station URLs is already returning 404s</li>
+<li><strong>Preset management</strong> in the SoundTouch app — can no longer set TuneIn presets</li>
+<li><strong>Spotify presets</strong> — fixable with a workaround (see below)</li>
+</ul>
+<h2 id="the-setup">The Setup</h2>
+<h3 id="1-get-ssh-access-to-your-speaker">1. Get SSH Access to Your Speaker</h3>
+<p>SoundTouch speakers run Linux. On firmware 27.x, you need a USB stick trick to enable SSH:</p>
+<ol>
+<li>Format a USB stick as FAT32</li>
+<li>Create an empty file called <code>remote_services</code> (no extension)</li>
+<li><strong>macOS users</strong>: remove hidden junk files — <code>mdutil -i off /Volumes/USB &amp;&amp; rm -rf /Volumes/USB/.fseventsd /Volumes/USB/.Spotlight-V100</code></li>
+<li>Power off the speaker, insert the USB, power on</li>
+<li>Wait 60 seconds, then: <code>ssh root@&lt;speaker-ip&gt;</code> (no password)</li>
+</ol>
+<p>Make it permanent: <code>touch /mnt/nv/remote_services</code></p>
+<p>During my setup, I also had to connect via Ethernet rather than WiFi. I changed both at the same time (cleaned the USB and switched to Ethernet), so I can&rsquo;t say for certain which was the fix.</p>
+<p>Full details: <a href="https://github.com/timvw/soundcork/blob/main/docs/speaker-setup.md">Speaker Setup Guide</a></p>
+<h3 id="2-extract-your-speaker-data">2. Extract Your Speaker Data</h3>
+<p>SoundCork needs four XML files from your speaker:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># From the speaker&#39;s local API (port 8090)</span>
+</span></span><span style="display:flex;"><span>curl http://&lt;speaker-ip&gt;:8090/presets &gt; Presets.xml
+</span></span><span style="display:flex;"><span>curl http://&lt;speaker-ip&gt;:8090/recents &gt; Recents.xml
+</span></span><span style="display:flex;"><span>curl http://&lt;speaker-ip&gt;:8090/info &gt; DeviceInfo.xml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># From SSH (contains auth tokens not exposed via the API)</span>
+</span></span><span style="display:flex;"><span>ssh root@&lt;speaker-ip&gt; cat /mnt/nv/BoseApp-Persistence/1/Sources.xml &gt; Sources.xml
+</span></span></code></pre></div><p>Place them in SoundCork&rsquo;s data directory — see the <a href="https://github.com/timvw/soundcork/tree/main/examples">examples/</a> directory for the expected format.</p>
+<h3 id="3-deploy-soundcork">3. Deploy SoundCork</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --name soundcork <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -p 8000:8000 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -v ./data:/soundcork/data <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -e <span style="color:#953800">base_url</span><span style="color:#0550ae">=</span>http://your-server:8000 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -e <span style="color:#953800">data_dir</span><span style="color:#0550ae">=</span>/soundcork/data <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  ghcr.io/timvw/soundcork:main
+</span></span></code></pre></div><p>The image is multi-arch (amd64 + arm64), so it works on a Raspberry Pi. See the <a href="https://github.com/timvw/soundcork/blob/main/docs/deployment.md">Deployment Guide</a> for Docker Compose, Kubernetes, and bare metal options.</p>
+<h3 id="4-redirect-your-speaker">4. Redirect Your Speaker</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh root@&lt;speaker-ip&gt;
+</span></span><span style="display:flex;"><span>rw  <span style="color:#57606a"># make filesystem writable</span>
+</span></span><span style="display:flex;"><span>vi /opt/Bose/etc/SoundTouchSdkPrivateCfg.xml
+</span></span></code></pre></div><p>Change all server URLs to point to your SoundCork instance. Reboot the speaker.</p>
+<p>Your speaker now sends all cloud traffic to your server. No data goes to Bose.</p>
+<h2 id="spotify-its-complicated">Spotify: It&rsquo;s Complicated</h2>
+<p>There are two separate Spotify systems on SoundTouch. <strong>Spotify Connect</strong> (cast from the Spotify app) always works — it doesn&rsquo;t touch Bose servers.</p>
+<p><strong>Spotify presets</strong> may fail initially with SoundCork. The fix: play one song via Spotify Connect first. This authenticates the speaker&rsquo;s embedded Spotify client over your local network, and after that, presets work. You may need to repeat this after a reboot.</p>
+<p>Details: <a href="https://github.com/timvw/soundcork/blob/main/docs/spotify.md">Spotify Guide</a></p>
+<h2 id="bose-server-status-february-2026">Bose Server Status (February 2026)</h2>
+<p>As of writing, the servers aren&rsquo;t fully shut down yet (that&rsquo;s May 6), but some APIs are already gone:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Server</th>
+          <th>Status</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>streaming.bose.com (marge)</td>
+          <td>Alive</td>
+      </tr>
+      <tr>
+          <td>content.api.bose.io (bmx)</td>
+          <td>API removed — 404s</td>
+      </tr>
+      <tr>
+          <td>worldwide.bose.com (updates)</td>
+          <td>API removed — 404s</td>
+      </tr>
+  </tbody>
+</table>
+<p>SoundCork handles all of these locally, so it doesn&rsquo;t matter whether Bose&rsquo;s servers are up or down.</p>
+<h2 id="whats-next">What&rsquo;s Next</h2>
+<p>SoundCork is a fork of <a href="https://github.com/deborahgu/soundcork">deborahgu/soundcork</a>. I&rsquo;ve added Docker support, a smart proxy with circuit breaker for testing, and the documentation you see here. PRs are going upstream.</p>
+<p>Bose has also published <a href="https://assets.bosecreative.com/m/496577402d128874/original/SoundTouch-Web-API.pdf">official API documentation</a> to help the community build tools — which is a good sign.</p>
+<p>If you have a SoundTouch speaker, now is the time to set this up — while the servers are still running and you can verify everything works.</p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="../../../../tags/bose">bose</a></li>
+							
+							<li><a href="../../../../tags/soundtouch">soundtouch</a></li>
+							
+							<li><a href="../../../../tags/self-hosting">self-hosting</a></li>
+							
+							<li><a href="../../../../tags/reverse-engineering">reverse-engineering</a></li>
+							
+							<li><a href="../../../../tags/docker">docker</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DP4SV12YW"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9DP4SV12YW');
+        }
+      </script><script>feather.replace()</script>
+</body>
+</html>
