@@ -6,8 +6,15 @@
     <description>Recent content in Devops on Tim Van Wassenhove</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Mar 2025 15:45:45 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 24 Feb 2026 11:01:14 +0100</lastBuildDate>
     <atom:link href="https://timvw.be/categories/devops/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Configuring Scaleway SAML SSO with Authentik</title>
+      <link>https://timvw.be/2026/02/24/configuring-scaleway-saml-sso-with-authentik/</link>
+      <pubDate>Tue, 24 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://timvw.be/2026/02/24/configuring-scaleway-saml-sso-with-authentik/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In previous posts, I covered &lt;a href=&#34;../../2025/03/17/setting-up-authentik-with-kubernetes-and-fluxcd/&#34;&gt;setting up Authentik with Kubernetes and FluxCD&lt;/a&gt;, &lt;a href=&#34;../../2025/03/18/managing-authentik-with-terraform/&#34;&gt;managing Authentik with Terraform&lt;/a&gt;, and integrating it with services like &lt;a href=&#34;../../2025/03/19/configuring-grafana-oauth-with-authentik/&#34;&gt;Grafana&lt;/a&gt;, &lt;a href=&#34;../../2025/03/20/configuring-minio-oauth-with-authentik/&#34;&gt;MinIO&lt;/a&gt;, and &lt;a href=&#34;../../2025/03/21/configuring-aws-identity-center-with-authentik-scim/&#34;&gt;AWS IAM Identity Center&lt;/a&gt;. Today, I&amp;rsquo;ll walk through how I configured SAML SSO for &lt;a href=&#34;https://www.scaleway.com/&#34;&gt;Scaleway&lt;/a&gt; using Authentik as the identity provider, all managed with Terraform.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.scaleway.com/&#34;&gt;Scaleway&lt;/a&gt; is a European cloud provider headquartered in Paris. As part of a broader move towards digital sovereignty and reducing dependency on US-based cloud providers, Scaleway offers an attractive alternative with data centers located exclusively in Europe. Integrating it with a self-hosted identity provider like Authentik fits well into this approach: keeping both infrastructure and identity management under European jurisdiction.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Implementing Domain-Level Forward Authentication with Authentik</title>
       <link>https://timvw.be/2025/03/22/implementing-domain-level-forward-authentication-with-authentik/</link>

@@ -5,19 +5,49 @@
     <loc>https://timvw.be/contact/</loc>
     <lastmod>2025-08-20T14:04:54+02:00</lastmod>
   </url><url>
-    <loc>https://timvw.be/tags/bose/</loc>
-    <lastmod>2026-02-17T02:47:53+01:00</lastmod>
+    <loc>https://timvw.be/tags/authentik/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/categories/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/2026/02/24/configuring-scaleway-saml-sso-with-authentik/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/categories/devops/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/categories/infrastructure/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/posts/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/saml/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/scaleway/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/sso/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/terraform/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/</loc>
+    <lastmod>2026-02-24T11:01:14+01:00</lastmod>
+  </url><url>
+    <loc>https://timvw.be/tags/bose/</loc>
     <lastmod>2026-02-17T02:47:53+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/docker/</loc>
     <lastmod>2026-02-17T02:47:53+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/2026/02/17/keep-your-bose-soundtouch-speaker-alive-after-the-shutdown/</loc>
-    <lastmod>2026-02-17T02:47:53+01:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/posts/</loc>
     <lastmod>2026-02-17T02:47:53+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/reverse-engineering/</loc>
@@ -30,12 +60,6 @@
     <lastmod>2026-02-17T02:47:53+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/soundtouch/</loc>
-    <lastmod>2026-02-17T02:47:53+01:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/tags/</loc>
-    <lastmod>2026-02-17T02:47:53+01:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/</loc>
     <lastmod>2026-02-17T02:47:53+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/ai/</loc>
@@ -125,19 +149,10 @@
     <loc>https://timvw.be/2025/06/27/distributed-tracing-with-fastmcp-combining-opentelemetry-and-langfuse/</loc>
     <lastmod>2025-10-14T18:10:32+02:00</lastmod>
   </url><url>
-    <loc>https://timvw.be/tags/authentik/</loc>
-    <lastmod>2025-03-22T15:45:45+01:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/categories/devops/</loc>
-    <lastmod>2025-03-22T15:45:45+01:00</lastmod>
-  </url><url>
     <loc>https://timvw.be/tags/forward-auth/</loc>
     <lastmod>2025-03-22T15:45:45+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/2025/03/22/implementing-domain-level-forward-authentication-with-authentik/</loc>
-    <lastmod>2025-03-22T15:45:45+01:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/categories/infrastructure/</loc>
     <lastmod>2025-03-22T15:45:45+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/kubernetes/</loc>
@@ -147,9 +162,6 @@
     <lastmod>2025-03-22T15:45:45+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/security/</loc>
-    <lastmod>2025-03-22T15:45:45+01:00</lastmod>
-  </url><url>
-    <loc>https://timvw.be/tags/terraform/</loc>
     <lastmod>2025-03-22T15:45:45+01:00</lastmod>
   </url><url>
     <loc>https://timvw.be/tags/aws/</loc>

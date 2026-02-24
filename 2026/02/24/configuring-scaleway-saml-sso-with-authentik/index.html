@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Configuring Scaleway SAML SSO with Authentik - Tim Van Wassenhove</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="Configuring Scaleway SAML SSO with Authentik">
+  <meta itemprop="description" content="Introduction In previous posts, I covered setting up Authentik with Kubernetes and FluxCD, managing Authentik with Terraform, and integrating it with services like Grafana, MinIO, and AWS IAM Identity Center. Today, I’ll walk through how I configured SAML SSO for Scaleway using Authentik as the identity provider, all managed with Terraform.
+Scaleway is a European cloud provider headquartered in Paris. As part of a broader move towards digital sovereignty and reducing dependency on US-based cloud providers, Scaleway offers an attractive alternative with data centers located exclusively in Europe. Integrating it with a self-hosted identity provider like Authentik fits well into this approach: keeping both infrastructure and identity management under European jurisdiction.">
+  <meta itemprop="datePublished" content="2026-02-24T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2026-02-24T11:01:14+01:00">
+  <meta itemprop="wordCount" content="1087">
+  <meta itemprop="keywords" content="Scaleway,Authentik,Saml,Terraform,Sso"><meta property="og:url" content="https://timvw.be/2026/02/24/configuring-scaleway-saml-sso-with-authentik/">
+  <meta property="og:site_name" content="Tim Van Wassenhove">
+  <meta property="og:title" content="Configuring Scaleway SAML SSO with Authentik">
+  <meta property="og:description" content="Introduction In previous posts, I covered setting up Authentik with Kubernetes and FluxCD, managing Authentik with Terraform, and integrating it with services like Grafana, MinIO, and AWS IAM Identity Center. Today, I’ll walk through how I configured SAML SSO for Scaleway using Authentik as the identity provider, all managed with Terraform.
+Scaleway is a European cloud provider headquartered in Paris. As part of a broader move towards digital sovereignty and reducing dependency on US-based cloud providers, Scaleway offers an attractive alternative with data centers located exclusively in Europe. Integrating it with a self-hosted identity provider like Authentik fits well into this approach: keeping both infrastructure and identity management under European jurisdiction.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-24T11:01:14+01:00">
+    <meta property="article:tag" content="Scaleway">
+    <meta property="article:tag" content="Authentik">
+    <meta property="article:tag" content="Saml">
+    <meta property="article:tag" content="Terraform">
+    <meta property="article:tag" content="Sso">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Configuring Scaleway SAML SSO with Authentik">
+  <meta name="twitter:description" content="Introduction In previous posts, I covered setting up Authentik with Kubernetes and FluxCD, managing Authentik with Terraform, and integrating it with services like Grafana, MinIO, and AWS IAM Identity Center. Today, I’ll walk through how I configured SAML SSO for Scaleway using Authentik as the identity provider, all managed with Terraform.
+Scaleway is a European cloud provider headquartered in Paris. As part of a broader move towards digital sovereignty and reducing dependency on US-based cloud providers, Scaleway offers an attractive alternative with data centers located exclusively in Europe. Integrating it with a self-hosted identity provider like Authentik fits well into this approach: keeping both infrastructure and identity management under European jurisdiction.">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://timvw.be/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://timvw.be/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://timvw.be/js/main.js"></script>
+	<link href="https://github.com/timvw" rel="me">
+    <link href="https://timvw.be/" rel="me">
+    <link href="https://fosstodon.org/@timvw" rel="me">
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://timvw.be/">Tim Van Wassenhove</a></h1>
+	<div class="site-description"><p>Passionate geek, interested in Technology. Proud father of two</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/timvw" title="Github"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/timvanwassenhove" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="https://timvw.be/feed.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a rel="me" href="https://fosstodon.org/@timvw" class="masto-link" ></a></li>
+			</ul>
+		
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="../../../../">Home</a>
+			</li>
+			
+			<li>
+				<a href="../../../../posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="../../../../tags">Tags</a>
+			</li>
+			
+			<li>
+				<a href="../../../../contact/">Contact</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">24</span>
+							<span class="rest">Feb 2026</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">Configuring Scaleway SAML SSO with Authentik</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<h2 id="introduction">Introduction</h2>
+<p>In previous posts, I covered <a href="../../../../2025/03/17/setting-up-authentik-with-kubernetes-and-fluxcd/">setting up Authentik with Kubernetes and FluxCD</a>, <a href="../../../../2025/03/18/managing-authentik-with-terraform/">managing Authentik with Terraform</a>, and integrating it with services like <a href="../../../../2025/03/19/configuring-grafana-oauth-with-authentik/">Grafana</a>, <a href="../../../../2025/03/20/configuring-minio-oauth-with-authentik/">MinIO</a>, and <a href="../../../../2025/03/21/configuring-aws-identity-center-with-authentik-scim/">AWS IAM Identity Center</a>. Today, I&rsquo;ll walk through how I configured SAML SSO for <a href="https://www.scaleway.com/">Scaleway</a> using Authentik as the identity provider, all managed with Terraform.</p>
+<p><a href="https://www.scaleway.com/">Scaleway</a> is a European cloud provider headquartered in Paris. As part of a broader move towards digital sovereignty and reducing dependency on US-based cloud providers, Scaleway offers an attractive alternative with data centers located exclusively in Europe. Integrating it with a self-hosted identity provider like Authentik fits well into this approach: keeping both infrastructure and identity management under European jurisdiction.</p>
+<p>Unlike the AWS integration, Scaleway&rsquo;s SCIM provisioning is currently in early access and not yet generally available. This means users need to be pre-provisioned in the Scaleway organization manually. Despite this limitation, SAML SSO still provides a centralized authentication experience.</p>
+<h2 id="integration-overview">Integration Overview</h2>
+<p>The integration involves:</p>
+<ol>
+<li><strong>Authentik as SAML Identity Provider (IdP)</strong>: Issues SAML assertions for authenticated users</li>
+<li><strong>Scaleway as SAML Service Provider (SP)</strong>: Consumes SAML assertions and grants access to the console</li>
+<li><strong>Terraform</strong>: Manages the Authentik-side configuration (SAML provider, application, group)</li>
+<li><strong>Manual Scaleway setup</strong>: Identity federation configuration in the Scaleway console, including user provisioning</li>
+</ol>
+<p>Since SCIM is not available, the NameID in the SAML assertion must match an existing user in the Scaleway organization. I chose to map on <strong>username</strong> rather than email, as this proved more reliable for matching users across both systems.</p>
+<h2 id="scaleway-side-setting-up-identity-federation">Scaleway Side: Setting up Identity Federation</h2>
+<p>In the Scaleway console, navigate to <strong>IAM &gt; Identity Providers</strong> and create a new SAML identity provider. You&rsquo;ll need:</p>
+<ol>
+<li><strong>SSO URL</strong>: The Authentik SAML POST binding URL (e.g., <code>https://authentik.apps.example.com/application/saml/scaleway-console/sso/binding/post/</code>)</li>
+<li><strong>Entity ID</strong>: Your Authentik instance URL (e.g., <code>https://authentik.apps.example.com/</code>)</li>
+<li><strong>Signing certificate</strong>: Download from Authentik&rsquo;s SAML provider metadata and upload to Scaleway</li>
+</ol>
+<p>After configuring the identity provider, Scaleway provides:</p>
+<ul>
+<li><strong>ACS URL</strong>: The assertion consumer service URL (e.g., <code>https://api.scaleway.com/iam/v1/saml/&lt;provider-id&gt;/login</code>)</li>
+<li><strong>Entity ID</strong>: The service provider entity ID (e.g., <code>https://iam.scaleway.com/saml/&lt;provider-id&gt;</code>)</li>
+</ul>
+<p>You&rsquo;ll also need to ensure each user who should log in via SSO exists as an <strong>IAM member</strong> in the Scaleway organization. The organization owner alone is not sufficient - users must be explicitly added as members with matching usernames.</p>
+<h2 id="authentik-side-terraform-configuration">Authentik Side: Terraform Configuration</h2>
+<p>With the Scaleway-side values in hand, I configured the Authentik SAML provider using Terraform:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-terraform" data-lang="terraform"><span style="display:flex;"><span><span style="color:#57606a"># Scaleway users group
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">resource</span> <span style="color:#0a3069">&#34;authentik_group&#34;</span> <span style="color:#0a3069">&#34;scaleway_users&#34;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">name</span> = <span style="color:#0a3069">&#34;scaleway-users&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Authentik SAML Provider for Scaleway
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">resource</span> <span style="color:#0a3069">&#34;authentik_provider_saml&#34;</span> <span style="color:#0a3069">&#34;scaleway&#34;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">name</span>               = <span style="color:#0a3069">&#34;Scaleway&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">authorization_flow</span> = <span style="color:#6639ba">data</span><span style="color:#1f2328">.</span><span style="color:#1f2328">authentik_flow</span><span style="color:#1f2328">.</span><span style="color:#1f2328">default_authorization_flow</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">invalidation_flow</span>  = <span style="color:#6639ba">data</span><span style="color:#1f2328">.</span><span style="color:#1f2328">authentik_flow</span><span style="color:#1f2328">.</span><span style="color:#1f2328">default_invalidation_flow</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">acs_url</span>            = <span style="color:#6639ba">var</span><span style="color:#1f2328">.</span><span style="color:#1f2328">scaleway_saml_acs_url</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">audience</span>           = <span style="color:#6639ba">var</span><span style="color:#1f2328">.</span><span style="color:#1f2328">scaleway_saml_entity_id</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">issuer</span>             = <span style="color:#6639ba">var</span><span style="color:#1f2328">.</span><span style="color:#1f2328">authentik_url</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">signing_kp</span>         = <span style="color:#6639ba">data</span><span style="color:#1f2328">.</span><span style="color:#1f2328">authentik_certificate_key_pair</span><span style="color:#1f2328">.</span><span style="color:#1f2328">default</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">sp_binding</span>         = <span style="color:#0a3069">&#34;post&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">sign_assertion</span>     = <span style="color:#cf222e">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">sign_response</span>      = <span style="color:#cf222e">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">property_mappings</span>  = <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">name_id_mapping</span>    = <span style="color:#6639ba">data</span><span style="color:#1f2328">.</span><span style="color:#1f2328">authentik_property_mapping_provider_saml</span><span style="color:#1f2328">.</span><span style="color:#1f2328">username</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Authentik Application for Scaleway
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">resource</span> <span style="color:#0a3069">&#34;authentik_application&#34;</span> <span style="color:#0a3069">&#34;scaleway&#34;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">name</span>              = <span style="color:#0a3069">&#34;Scaleway Console&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">slug</span>              = <span style="color:#0a3069">&#34;scaleway-console&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">protocol_provider</span> = <span style="color:#1f2328">authentik_provider_saml</span><span style="color:#1f2328">.</span><span style="color:#1f2328">scaleway</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">meta_launch_url</span>   = <span style="color:#0a3069">&#34;https://console.scaleway.com&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">open_in_new_tab</span>   = <span style="color:#cf222e">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Restrict access to scaleway-users group
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">resource</span> <span style="color:#0a3069">&#34;authentik_policy_binding&#34;</span> <span style="color:#0a3069">&#34;scaleway_access&#34;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">target</span> = <span style="color:#1f2328">authentik_application</span><span style="color:#1f2328">.</span><span style="color:#1f2328">scaleway</span><span style="color:#1f2328">.</span><span style="color:#6639ba">uuid</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">group</span>  = <span style="color:#1f2328">authentik_group</span><span style="color:#1f2328">.</span><span style="color:#1f2328">scaleway_users</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">order</span>  = <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>The key settings to highlight:</p>
+<ol>
+<li><strong><code>issuer</code></strong>: Must be set to your Authentik instance URL (<code>var.authentik_url</code>), not the Scaleway entity ID. This is what Scaleway expects as the <code>&lt;Issuer&gt;</code> element in the SAML response.</li>
+<li><strong><code>sp_binding = &quot;post&quot;</code></strong>: Scaleway expects the SAML response to be delivered via HTTP POST.</li>
+<li><strong><code>sign_assertion = true</code> and <code>sign_response = true</code></strong>: Scaleway requires both the assertion and the response to be signed.</li>
+<li><strong><code>name_id_mapping</code></strong>: Uses the built-in username mapping rather than email, so the NameID in the SAML assertion matches the Scaleway username.</li>
+<li><strong><code>authentik_policy_binding</code></strong>: Restricts access to the Scaleway application to members of the <code>scaleway-users</code> group. Without this, any Authentik user could authenticate.</li>
+</ol>
+<p>The variables are defined as:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-terraform" data-lang="terraform"><span style="display:flex;"><span><span style="color:#cf222e">variable</span> <span style="color:#0a3069">&#34;scaleway_saml_acs_url&#34;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">type</span>        = <span style="color:#1f2328">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">description</span> = <span style="color:#0a3069">&#34;Scaleway SAML Assertion Consumer Service URL (from Scaleway IAM Identity Federation settings)&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">variable</span> <span style="color:#0a3069">&#34;scaleway_saml_entity_id&#34;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">type</span>        = <span style="color:#1f2328">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">description</span> = <span style="color:#0a3069">&#34;Scaleway SAML Entity ID / Audience (from Scaleway IAM Identity Federation settings)&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>And the data sources referenced:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-terraform" data-lang="terraform"><span style="display:flex;"><span><span style="color:#cf222e">data</span> <span style="color:#0a3069">&#34;authentik_property_mapping_provider_saml&#34;</span> <span style="color:#0a3069">&#34;username&#34;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">managed</span> = <span style="color:#0a3069">&#34;goauthentik.io/providers/saml/username&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><h2 id="troubleshooting">Troubleshooting</h2>
+<p>Getting SAML SSO working required solving three distinct issues. Here&rsquo;s what I encountered and how each was resolved.</p>
+<h3 id="csrf-403-redirect-vs-post-binding">CSRF 403: Redirect vs POST Binding</h3>
+<p><strong>Symptom</strong>: When initiating SSO from Scaleway, the AuthnRequest POST to Authentik failed with a 403 CSRF error before the login form was presented.</p>
+<p><strong>Cause</strong>: In the SP-initiated SAML flow, Scaleway sends an AuthnRequest to Authentik via HTTP POST. If the SSO URL points to the redirect binding (<code>/sso/binding/redirect/</code>), Django&rsquo;s CSRF protection blocks it because the redirect binding is designed for GET requests. The POST binding endpoint (<code>/sso/binding/post/</code>) is CSRF-exempt in Authentik, bypassing CSRF validation for this view.</p>
+<p><strong>Fix</strong>: Ensure the SSO URL configured in Scaleway uses the POST binding path:</p>
+<pre tabindex="0"><code>https://authentik.apps.example.com/application/saml/scaleway-console/sso/binding/post/
+</code></pre><p>No changes to Django&rsquo;s <code>CSRF_TRUSTED_ORIGINS</code> are needed — the POST binding endpoint is CSRF-exempt, so no additional configuration is needed.</p>
+<h3 id="issuer-mismatch">Issuer Mismatch</h3>
+<p><strong>Symptom</strong>: After fixing the CSRF issue, Scaleway returned: <em>&ldquo;response Issuer does not match the IDP metadata (expected <code>https://authentik.apps.example.com/</code>)&rdquo;</em>.</p>
+<p><strong>Cause</strong>: The Terraform configuration initially set <code>issuer = var.scaleway_saml_entity_id</code>, which put Scaleway&rsquo;s own entity ID into the SAML response&rsquo;s <code>&lt;Issuer&gt;</code> element. Scaleway expects the issuer to be the <strong>identity provider&rsquo;s</strong> entity ID, not its own.</p>
+<p><strong>Fix</strong>: Change <code>issuer</code> to <code>var.authentik_url</code> (the Authentik instance URL), which matches the Entity ID configured on the Scaleway side.</p>
+<h3 id="user-not-found">User Not Found</h3>
+<p><strong>Symptom</strong>: After fixing the issuer, Scaleway returned: <em>&ldquo;The user <code>user@example.com</code> was not found inside the organization&rdquo;</em>.</p>
+<p><strong>Cause</strong>: The NameID mapping was set to <code>email</code>, sending <code>user@example.com</code> as the NameID. Although the user existed in the Scaleway organization with that email, the matching didn&rsquo;t work as expected.</p>
+<p><strong>Fix</strong>: Switch the <code>name_id_mapping</code> from the email property mapping to the username property mapping. This sends the username as the NameID, which matches the Scaleway username directly. Also ensure the user is added as an <strong>IAM member</strong> (not just the organization owner) in the Scaleway organization.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Integrating Scaleway with Authentik via SAML SSO centralizes authentication alongside other services like AWS and Grafana. While the lack of SCIM provisioning means users must be pre-created in Scaleway&rsquo;s IAM, the SAML integration still provides a single sign-on experience.</p>
+<p>The key takeaways from this integration:</p>
+<ul>
+<li>Use the <strong>POST binding</strong> URL for the SSO endpoint — it is CSRF-exempt in Authentik, avoiding issues with cross-origin POST requests</li>
+<li>The SAML <code>issuer</code> must be the <strong>identity provider&rsquo;s</strong> entity ID, not the service provider&rsquo;s</li>
+<li>Match the <strong>NameID mapping</strong> to however users are identified in the service provider (username in Scaleway&rsquo;s case)</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.scaleway.com/en/docs/iam/how-to/set-up-identity-federation/">Scaleway: How to Set Up Identity Federation</a></li>
+<li><a href="https://www.scaleway.com/en/docs/iam/how-to/set-up-sso-with-authentik/">Scaleway: How to Set Up SSO with Authentik</a></li>
+<li><a href="https://docs.goauthentik.io/docs/providers/saml">Authentik SAML Provider Documentation</a></li>
+<li><a href="https://registry.terraform.io/providers/goauthentik/authentik/latest/docs">Authentik Terraform Provider</a></li>
+<li><a href="https://github.com/SimpleSAMLphp/SAML-tracer">SAML-tracer, a Firefox extension for debugging SAML communication</a></li>
+</ul>
+
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="../../../../tags/scaleway">scaleway</a></li>
+							
+							<li><a href="../../../../tags/authentik">authentik</a></li>
+							
+							<li><a href="../../../../tags/saml">saml</a></li>
+							
+							<li><a href="../../../../tags/terraform">terraform</a></li>
+							
+							<li><a href="../../../../tags/sso">sso</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DP4SV12YW"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9DP4SV12YW');
+        }
+      </script><script>feather.replace()</script>
+</body>
+</html>
