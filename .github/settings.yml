@@ -1,2 +1,4 @@
+# Repository settings, applied by the Settings app - https://github.com/probot/settings
+
 repository:
   delete_branch_on_merge: true
